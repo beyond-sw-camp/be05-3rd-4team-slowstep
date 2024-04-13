@@ -1,6 +1,6 @@
 <template>
   <div>
-    MsgListPage
+    Patient Main
   </div>
 </template>
 
