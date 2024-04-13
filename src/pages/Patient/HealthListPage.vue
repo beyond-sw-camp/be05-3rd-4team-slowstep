@@ -5,14 +5,16 @@
         <label class="nameDiv font">건강정보 내역</label>
       </div>
       <div class="col-3 flex" >
-        <button class="btn btn-success font">뒤로가기</button>
+        <button class="btn btn-success font" v-on:click="toMain">뒤로가기</button>
       </div>
     </div>
 
     <div class=" listDiv">
-      <div class="card" v-for="msg in msgList" :key="msg.PM_NO">
-        <div class="card-body font">
-          {{ msg.PM_CN }}
+      <div class="card" v-for="(health ,index) in healthList" :key="health.ptHthInfoNo">
+        <div class="card-body font"
+            @click="toHealthView(health.ptHthInfoNo, index)">
+
+          {{ health.inspDt }}
         </div>
       </div>
     </div>
@@ -22,42 +24,19 @@
 
 <script>
 import {ref} from "vue"
+import {useRouter} from 'vue-router';
 import axios from "axios";
-
 
 export default {
   setup(){
 
-    let healthList = ref([{
-        "PM_RM_NO": "1",
-        "RD_YN": "1",
-        "PM_CN": "김옥례 환자 관련 연락드립니다.",
-        "PM_NO": "1",
-        "TRSM_DIR": "0",
-        "PM_DSPTCH_DT": "2024-03-26 00:00:00",
-        "RD_DT": "2024-03-26 17:24:38"
-      },
-      {
-        "PM_RM_NO": "1",
-        "RD_YN": "1",
-        "PM_CN": "네.",
-        "PM_NO": "2",
-        "TRSM_DIR": "1",
-        "PM_DSPTCH_DT": "2024-03-26 00:00:00",
-        "RD_DT": "2024-03-26 17:27:19"
-      }]);
-    // 로그인 구현시 수정
+    let healthList = ref([]);
 
     const getHealthList = () => {
-      let url = "http://localhost:7777/pmrm/view/2";
-      // 로그인 구현시 수정
-      let data = {
-          "pmRmNo": 1,
-          "mdNo": 1,
-          "rnNo": 1
-      }
+      let url = "http://localhost:7777/all/pt_hth_info/1";
+      // 메인 페이지 구현시 수정
 
-      axios(url, data)
+      axios(url)
         .then( res => {
           healthList.value = res.data;
         })
@@ -67,11 +46,32 @@ export default {
       
     }
 
-    // getHealthList();
+    getHealthList();
+
+    const router = useRouter();
+    const toHealthView = (ptHthInfoNo, index) => {
+      router.push({
+        name : "HealthView",
+        params :{
+          id : ptHthInfoNo
+        },
+        state : {
+          data : JSON.stringify(healthList.value[index])
+        }
+      })
+    }
+
+    const toMain = () => {
+      router.push({
+        name : "UserMain"
+      })
+    }
 
     return {
       healthList,
-      getHealthList
+      getHealthList,
+      toHealthView,
+      toMain,
     }
   }
 }
@@ -100,6 +100,7 @@ export default {
 
   .nameDiv{
     font-size: larger;
+    text-decoration-line: underline;
   }
 
   .font{
@@ -109,6 +110,7 @@ export default {
 
   .card-body{
     position: relative;
+    cursor: pointer;
   }
   .badge{
     position:absolute;
