@@ -11,13 +11,13 @@
         <div class="input-group">
           <span class="input-group-text">기록날짜</span>
           <input
-            type="text"
+            type="date"
             aria-label="Year"
             class="form-control indent"
             placeholder="년"
           />
           <input
-            type="text"
+            type="text  "
             aria-label="Month"
             class="form-control indent"
             placeholder="월"
