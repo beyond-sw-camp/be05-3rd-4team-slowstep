@@ -3,11 +3,19 @@
     <div class="row mb-2 mt-5">
       <div class="col-9">
         <div class="fromDiv">
-          <label for="">FROM 간호사 ooo</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="제목을 입력해 주세요"
+            value="OOO 간호사."
+            readonly
+          />
         </div>
       </div>
       <div class="col-3 but">
-        <button class="btn btn-success back">뒤로가기</button>
+        <button class="btn btn-success back" v-on:click="toMsgList">
+          뒤로가기
+        </button>
       </div>
       <div class="row mt-4 mb-2">
         <div class="col-11">
@@ -37,17 +45,25 @@
 </template>
 
 <script>
-export default {};
+import { useRouter } from "vue-router";
+
+export default {
+  setup() {
+    const router = useRouter();
+    const toMsgList = () => {
+      router.push({
+        name: "PatientMain",
+      });
+    };
+
+    return {
+      toMsgList,
+    };
+  },
+};
 </script>
 
 <style scoped>
-.fromDiv {
-  border: solid 1px;
-  border-color: rgb(154, 154, 154);
-
-  height: 100%;
-}
-
 div.col-3.but {
 }
 
