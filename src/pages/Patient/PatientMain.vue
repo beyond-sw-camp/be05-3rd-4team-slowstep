@@ -44,7 +44,7 @@
       <div class="card" style="overflow: scroll; width: 100%; height: 250px; padding: 10px;">
         <ul class="list-group list-group-flush">
           <!-- 각 아이템을 li 요소로 나타내고 클릭 시 해당 아이템의 상세 페이지로 이동 -->
-          <li class="list-group-item" v-for="item in items" :key="item.id" @click="goToItemDetail(item.id)">
+          <li class="list-group-item" v-for="item in items" :key="item.id" @click="goToExamView(item.id)">
             {{ item.name }}
           </li>
         </ul>
@@ -73,9 +73,9 @@ export default {
   },
   methods: {
     // 아이템 상세 페이지로 이동하는 메서드
-    goToItemDetail(itemId) {
+    goToExamView(itemId) {
       // 아이템 상세 페이지로 이동
-      this.$router.push(`/item/${itemId}`);
+      this.$router.push(`/exam/view/${itemId}`);
     },
 
     toHealthList() {
@@ -104,12 +104,15 @@ export default {
 
 /* 선택한 아이템에 hover 시 배경색 변경 */
 .list-group-item:hover {
-  background-color: #f0f0f0; /* 마우스를 가져갔을 때 배경색 변경 */
+  background-color: #e6ffee; /* 연한 연초록색 */
 }
 
 .rounded-image {
   border-radius: 100%; /* 이미지를 동그랗게 출력하기 위한 스타일 */
 }
 
-
+/* 카드 테두리 스타일 및 색상 변경 */
+.card {
+  border: 1px solid green; /* 테두리 두께와 색상 설정 */
+}
 </style>

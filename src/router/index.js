@@ -9,6 +9,7 @@ import PatientMain from '@/pages/Patient/PatientMain.vue'
 import HealthList from '@/pages/Patient/HealthListPage.vue'
 import HealthView from '@/pages/Patient/HealthViewPage.vue'
 import HealthAdd from '@/pages/Patient/HealthAddPage.vue'
+import ExamView from '@/pages/Patient/ExamViewPage.vue'
 
 
 
@@ -61,6 +62,11 @@ const router = createRouter( {
             path : '/patient/health/add',
             name : 'HealthAdd',
             component : HealthAdd
+        },
+        {
+            path : '/patient/exam/view/:id',
+            name : 'ExamView',
+            component : ExamView
         }
         
        
