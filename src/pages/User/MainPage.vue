@@ -65,7 +65,7 @@ methods: {
   },
   viewPatientDetail(patient) {
     console.log('환자 상세 보기:', patient.name);
-    // 환자 상세 정보 페이지로 이동하는 로직을 추가할 수 있습니다.
+    this.$router.push({ name: 'PatientMain', params: { id: patient.name } });
   }
 }
 };
@@ -73,121 +73,122 @@ methods: {
 
 <style scoped>
 .container {
-max-width: 1200px;
-margin: auto;
-padding: 20px;
-display: flex; /* Flex를 사용하여 컨테이너 내 아이템들을 행으로 배치 */
-justify-content: space-between; /* 아이템들 사이에 균등한 간격 배치 */
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px;
+  display: flex; /* Flex를 사용하여 컨테이너 내 아이템들을 행으로 배치 */
+  justify-content: space-between; /* 아이템들 사이에 균등한 간격 배치 */
 }
 
 .cards-layout {
-display: flex;
-flex: 1; /* 부모 요소의 전체 너비를 차지하도록 설정 */
-gap: 30px; /* 카드 사이의 간격 */
+  display: flex;
+  flex: 1; /* 부모 요소의 전체 너비를 차지하도록 설정 */
+  gap: 40px; /* 카드 사이의 간격 */
 }
 
 .card {
-flex: 1; /* 각 카드가 가능한 같은 비율로 너비를 차지하도록 설정 */
-background: #fff;
-border-radius: 8px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-overflow: hidden;
-display: flex;
-flex-direction: column; /* 카드 내부의 내용을 세로로 쌓기 */
+  flex: 1; /* 각 카드가 가능한 같은 비율로 너비를 차지하도록 설정 */
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* 카드 내부의 내용을 세로로 쌓기 */
 }
 
 .card-header {
-background-color:green; /* Deep plum */
-color: white;
-padding: 15px 20px;
-font-size: 1.2em;
-border-bottom: 1px solid #fff2;
+  background-color: #28a745; /* Deep plum */
+  color: white;
+  padding: 15px 20px;
+  font-size: 1.2em;
+  border-bottom: 1px solid #fff2;
 }
 
 .list-group {
-list-style: none;
-padding: 0;
-margin: 0;
-flex: 1; /* 리스트 그룹이 카드 내에서 가능한 많은 공간을 차지하도록 설정 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1; /* 리스트 그룹이 카드 내에서 가능한 많은 공간을 차지하도록 설정 */
 }
 
 .list-group-item {
-padding: 15px 20px;
-border-bottom: 1px solid #eee;
-cursor: pointer;
-transition: background-color 0.3s;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .list-group-item:hover {
-background-color: #f7f7f7;
+  background-color: #f7f7f7;
 }
 
 .card-content {
-overflow-y: auto;
-max-height: 800px; /* 컨텐츠가 많을 경우 스크롤바 생성 */
-padding: 15px;
+  overflow-y: auto;
+  max-height: 800px; /* 컨텐츠가 많을 경우 스크롤바 생성 */
+  padding: 15px;
 }
 
 .patient-info {
-margin-bottom: 15px;
-transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .patient-info:hover {
-transform: translateY(-5px);
-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .patient-box {
-display: flex;
-align-items: center;
-background: #fff;
-border-radius: 8px;
-padding: 15px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 15px;
 }
 
 .info-and-button {
-flex-grow: 1;
-margin-left: 15px;
-display: flex;
-flex-direction: column;
-justify-content: space-around;
+  flex-grow: 1;
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .hospital-name, .patient-details {
-text-align: left;
+  text-align: left;
 }
 
 .patient-name {
-margin: 0;
-color: #333;
-font-size: 1.4em;
+  margin: 0;
+  color: #333;
+  font-size: 1.4em;
 }
 
 .patient-age-gender {
-color: #666;
-font-size: 0.9em;
+  color: #666;
+  font-size: 0.9em;
 }
 
 .rounded-image {
-border-radius: 50%;
-width: 100px;
-height: 100px;
-object-fit: cover;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
 .btn-primary, .btn-success {
-padding: 10px 15px;
-border-radius: 4px;
-cursor: pointer;
-text-transform: uppercase;
-font-weight: bold;
-letter-spacing: 1px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .btn-primary:hover, .btn-success:hover {
-background-color: #4CAF50; /* Bootstrap success color on hover */
-color: white;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #4CAF50; /* Bootstrap success color on hover */
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 </style>
+
