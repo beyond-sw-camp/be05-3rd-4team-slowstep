@@ -10,24 +10,7 @@
       <div class="col-5">
         <div class="input-group">
           <span class="input-group-text">기록날짜</span>
-          <input
-            type="date"
-            aria-label="Year"
-            class="form-control indent"
-            placeholder="년"
-          />
-          <input
-            type="text  "
-            aria-label="Month"
-            class="form-control indent"
-            placeholder="월"
-          />
-          <input
-            type="text"
-            aria-label="Day"
-            class="form-control indent"
-            placeholder="일"
-          />
+          <input type="date" aria-label="Year" class="form-control indent" />
         </div>
       </div>
 
@@ -75,7 +58,9 @@
     <div class="row mb-2 mt-5">
       <div class="col-4"></div>
       <div class="col-5 but">
-        <button class="btn btn-success back">뒤로가기</button>
+        <button class="btn btn-success back" v-on:click="toPatientMain">
+          뒤로가기
+        </button>
         <button class="btn btn-success regi">등록</button>
       </div>
 
@@ -85,7 +70,21 @@
 </template>
 
 <script>
-export default {};
+import { useRouter } from "vue-router";
+export default {
+  setup() {
+    const router = useRouter();
+    const toPatientMain = () => {
+      router.push({
+        name: "PatientMain",
+      });
+    };
+
+    return {
+      toPatientMain,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -102,5 +101,9 @@ export default {};
 
 .fromDiv {
   border: none;
+}
+
+textarea {
+  resize: none;
 }
 </style>
