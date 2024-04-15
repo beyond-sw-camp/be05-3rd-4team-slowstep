@@ -8,15 +8,39 @@
   <div align="center" class="password">
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호를 입력하세요" autocomplete="off">
   </div>
-    <label class="find">아이디/비밀번호찾기</label>
+    <label class="find" @click="toFind">아이디/비밀번호찾기</label>
   <div align="center" class="login">
-    <button type="button" class="btn btn-success">로그인</button>
+    <button type="button" class="btn btn-success" @click="toLogIn">로그인</button>
   </div>
 </template>
 
 <script>
+import {useRouter} from 'vue-router';
+// import axios from 'axios';
 export default {
 
+  setup() {
+    const router = useRouter();
+    const isLoggedIn = false;
+    const toLogIn = () => {
+      if(isLoggedIn) {
+        console.log("happy");
+      } else {
+        router.push({
+          name: "UserMain"
+        })
+      }
+    }
+    const toFind = () => {
+      router.push({
+        name: "Find"
+      })
+    }
+    return {
+      toLogIn,
+      toFind
+    }
+  }
 }
 </script>
 
