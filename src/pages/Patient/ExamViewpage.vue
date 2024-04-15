@@ -88,7 +88,9 @@
     <div class="row mb-2 mt-5">
       <div class="col-4"></div>
       <div class="col-5 but">
-        <button class="btn btn-success back">뒤로가기</button>
+        <button class="btn btn-success back" v-on:click="toPatientMain">
+          뒤로가기
+        </button>
       </div>
 
       <div class="col-3"></div>
@@ -97,7 +99,21 @@
 </template>
 
 <script>
-export default {};
+import { useRouter } from "vue-router";
+export default {
+  setup() {
+    const router = useRouter();
+    const toPatientMain = () => {
+      router.push({
+        name: "PatientMain",
+      });
+    };
+
+    return {
+      toPatientMain,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -114,5 +130,9 @@ export default {};
 
 .fromDiv {
   border: none;
+}
+
+textarea {
+  resize: none;
 }
 </style>

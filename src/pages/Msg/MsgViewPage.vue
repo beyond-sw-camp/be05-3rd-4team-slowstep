@@ -52,7 +52,7 @@ export default {
     const router = useRouter();
     const toMsgList = () => {
       router.push({
-        name: "PatientMain",
+        name: "MsgList",
       });
     };
 
