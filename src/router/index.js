@@ -10,6 +10,9 @@ import HealthList from '@/pages/Patient/HealthListPage.vue'
 import HealthView from '@/pages/Patient/HealthViewPage.vue'
 import HealthAdd from '@/pages/Patient/HealthAddPage.vue'
 
+
+
+
 const router = createRouter( {
     history: createWebHistory(),
     routes: [
@@ -58,9 +61,11 @@ const router = createRouter( {
             path : '/patient/health/add',
             name : 'HealthAdd',
             component : HealthAdd
-        },
+        }
+        
+       
     ]
-})
+});
 
 
 export default router;
