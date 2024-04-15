@@ -6,7 +6,9 @@
   
     <div class="card-container">
     <!-- 첫 번째 카드 -->
-      <div class="card first-card" style="width: 40rem; height: 16rem; margin-right: 3rem;">
+    <div>
+      <span style="font-size: 24px;">환자 정보</span>
+      <div class="card first-card" style="width: 31.5rem; height: 16rem; margin-right: 3rem; margin-top:1rem;">
           <div class="card-body d-flex align-items-center">
               <img
                   src="@/assets/woman_pink.jpg"
@@ -20,9 +22,13 @@
               </div>
           </div>
       </div>
+    </div>
 
       <!-- 두 번째 카드 -->
-      <div class="card second-card" style=" width: 50rem; height: 16rem;">
+    <div>
+      <span style="font-size: 24px;">건강 정보</span>
+      <button class="btn btn-success" @click="addRecord" style="float : right;">+</button>
+      <div class="card second-card" style=" width: 45rem; height: 16rem; margin-top:1rem;">
         <div class="card-body">
           <h6 class="card-subtitle mb-2 text-body-secondary">OOOO년 OO월 OO일 OO시 OO분 업데이트</h6>
           <br>
@@ -36,11 +42,14 @@
         </div>
       </div>
     </div>
+  </div>
 
     <!-- 환자 진료 내역 -->
     <br>
     <div>
-      <h4>진료 기록</h4>
+      
+      <span style="font-size: 24px;">진료 기록</span>
+      <button class="btn btn-success mb-3" @click="addRecord" style="float : right;">+</button>
       <div class="card" style="overflow: scroll; width: 100%; height: 250px; padding: 10px;">
         <ul class="list-group list-group-flush">
           <!-- 각 아이템을 li 요소로 나타내고 클릭 시 해당 아이템의 상세 페이지로 이동 -->
