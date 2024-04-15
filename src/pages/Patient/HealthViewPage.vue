@@ -1,111 +1,115 @@
 <template>
   <div class="container">
-    <div class="row mb-5 mt-3 font">
-      <div class="col-5">
-          <h2>{{ healthInfo.inspDt }}</h2>
+    <br>
+
+    <!-- 환자 정보 및 건강 정보 -->
+  
+    <div class="card-container">
+    <!-- 첫 번째 카드 -->
+      <div class="card first-card" style="width: 40rem; height: 16rem; margin-right: 3rem;">
+          <div class="card-body d-flex align-items-center">
+              <img
+                  src="@/assets/woman_pink.jpg"
+                  alt="Woman Image"
+                  class="rounded-image mr-3"
+                  style="width: 10rem; height: 10rem; margin-left: 2rem; margin-right: 3rem;"
+              >
+              <div>
+                  <h3 class="card-title">OOOO 요양원</h3>
+                  <p class="card-text" style="font-size: 50px; margin-right: 7rem;">OOO</p>
+              </div>
+          </div>
       </div>
-      <div class="col-7">
-        <h2>oo 환자</h2>
-        <!-- vuex로 전역변수 구현시 수정 -->
-      </div>  
+
+      <!-- 두 번째 카드 -->
+      <div class="card second-card" style=" width: 50rem; height: 16rem;">
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-body-secondary">OOOO년 OO월 OO일 OO시 OO분 업데이트</h6>
+          <br>
+          <p class="card-text" style="font-size: 20px;">최고 혈압 : OOO</p>
+          <p class="card-text" style="font-size: 20px;">최저 혈압 : OOO</p>
+          <p class="card-text" style="font-size: 20px;">공복 혈당 : OOO</p>
+          <div class="flex_item">
+              <!-- 버튼 클릭 시 건강정보 상세내역으로. -->
+              <button class="btn btn-success font mt-1" @click="toHealthList">내역보기</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="row">
-      <table class="table table-borderless font table-success">
-        <tbody>
-          <tr>
-            <td style="text-align:center;">혈압</td>
-            <td>{{healthInfo.ptBp}} mm Hg</td>
-          </tr>
-          <tr>
-            <td style="text-align:center;">공복혈당</td>
-            <td>{{healthInfo.ptBst}} mg/dl</td>
-          </tr>
-          <tr>
-            <td style="text-align:center;">체중</td>
-            <td>{{healthInfo.ptWt}} kg</td>
-          </tr>
-          <tr>
-            <td style="text-align:center;">심박수</td>
-            <td>{{healthInfo.ptHr}} bpm</td>
-          </tr>
-          <tr>
-            <td style="text-align:center;">현재 복용 약물</td>
-            <td>{{drugInfo != null ? drugInfo.drugNm : "복용 약물 없음"}}</td>
-            <!-- 하루에 여러 약물을 섭취할 경우 v-for을 이용해 처리 -->
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="flex_item">
-        <button class="btn btn-success font mt-4" v-on:click="toHealthList">뒤로가기</button>
+    <!-- 환자 진료 내역 -->
+    <br>
+    <div>
+      <h4>진료 기록</h4>
+      <div class="card" style="overflow: scroll; width: 100%; height: 250px; padding: 10px;">
+        <ul class="list-group list-group-flush">
+          <!-- 각 아이템을 li 요소로 나타내고 클릭 시 해당 아이템의 상세 페이지로 이동 -->
+          <li class="list-group-item" v-for="item in items" :key="item.id" @click="goToItemDetail(item.id)">
+            {{ item.name }}
+          </li>
+        </ul>
       </div>
-      
     </div>
-
   </div>
 </template>
 
 <script>
-import {useRoute, useRouter} from 'vue-router';
-import {ref} from "vue"
-import axios from "axios";
-
 export default {
-  setup(){
-    const route = useRoute();
-    // console.log(route.params.id);
+  data() {
+    return {
+      items: [
+        { id: 1, name: 'Item 1' },
+        { id: 2, name: 'Item 2' },
+        { id: 3, name: 'Item 3' },
+        { id: 4, name: 'Item 4' },
+        { id: 5, name: 'Item 5' },
+        { id: 6, name: 'Item 6' },
+        { id: 7, name: 'Item 7' },
+        { id: 8, name: 'Item 8' },
+        { id: 9, name: 'Item 9' },
+        { id: 10, name: 'Item 10' }
+      ]
+    };
+  },
+  methods: {
+    // 아이템 상세 페이지로 이동하는 메서드
+    goToItemDetail(itemId) {
+      // 아이템 상세 페이지로 이동
+      this.$router.push(`/item/${itemId}`);
+    },
 
-    const healthInfo = JSON.parse(history.state.data);
-    // console.log(healthInfo);
-
-    let drugInfo = ref({});
-    const getDrugInfo = () => {
-      let url = "http://localhost:7777/all/ad_drug_info/" + route.params.id;
-
-      axios(url)
-        .then(res => {
-          drugInfo.value = res.data[0];
-          // console.log(drugInfo.value.drugNm);
-        })
-        .catch(err => {
-          console.log(err.message);
-        })
-    }
-
-    getDrugInfo();
-
-    const router = useRouter();
-    const toHealthList = () => {
-      router.push({
-        name : "HealthList"
-      })
-    }
-
-    return{
-      healthInfo,
-      drugInfo,
-      getDrugInfo,
-      toHealthList
+    toHealthList() {
+      // 메인 페이지로 이동
+      this.$router.push({ name: 'HealthList' });
     }
   }
-}
+};
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+<style scoped>
+.card-container {
+  display: flex;
+  justify-content: flex-start; /* 첫 번째 카드를 시작 부분에 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+}
 
-  .row{
-    font-size: larger;
-  }
+.flex_item {
+  display: flex;
+  justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
+}
 
-  .flex_item{
-    display: flex;
-    justify-content: center;
-  }
+.list-group-item {
+  cursor: pointer; /* 커서 모양을 클릭 모양으로 변경 */
+}
 
-  .font{
-    font-family: "Nanum Gothic";
-    text-shadow : 0px 1px;
-  }
+/* 선택한 아이템에 hover 시 배경색 변경 */
+.list-group-item:hover {
+  background-color: #f0f0f0; /* 마우스를 가져갔을 때 배경색 변경 */
+}
+
+.rounded-image {
+  border-radius: 100%; /* 이미지를 동그랗게 출력하기 위한 스타일 */
+}
+
+
 </style>
