@@ -9,7 +9,6 @@ import PatientMain from '@/pages/Patient/PatientMain.vue'
 import HealthList from '@/pages/Patient/HealthListPage.vue'
 import HealthView from '@/pages/Patient/HealthViewPage.vue'
 import HealthAdd from '@/pages/Patient/HealthAddPage.vue'
-import ViewDetail from '@/pages/Patient/ViewDetailPage.vue'
 
 const router = createRouter( {
     history: createWebHistory(),
@@ -51,7 +50,7 @@ const router = createRouter( {
 
         },
         {
-            path : '/patient/health/view/:id',
+            path : '/patient/health/view',
             name : 'HealthView',
             component : HealthView
         },
@@ -60,11 +59,6 @@ const router = createRouter( {
             name : 'HealthAdd',
             component : HealthAdd
         },
-        {
-            path : '/patient/viewdetail',
-            name : 'viewdetail',
-            component : ViewDetail
-        }
     ]
 })
 

@@ -5,7 +5,7 @@
         <label class="nameDiv font">건강정보 내역</label>
       </div>
       <div class="col-3 flex" >
-        <button class="btn btn-success font" v-on:click="toMain">뒤로가기</button>
+        <button class="btn btn-success font" v-on:click="toHealthView">뒤로가기</button>
       </div>
     </div>
 
