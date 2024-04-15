@@ -3,17 +3,17 @@
     <div class="row mb-2 mt-5">
       <div class="col-9" >
         <!-- 로그인 구현시 수정 -->
-        <label class="nameDiv font">간호사 ooo님</label>
+        <label class="nameDiv">간호사 ooo님</label>
       </div>
       <div class="col-3 flex" >
-        <button class="btn btn-success font" v-on:click="toMain">뒤로가기</button>
-        <button class="btn btn-success font" v-on:click="toMsgAdd">+</button>
+        <button class="btn btn-success" v-on:click="toMain">뒤로가기</button>
+        <button class="btn btn-success" v-on:click="toMsgAdd">+</button>
       </div>
     </div>
 
     <div class=" listDiv">
       <div class="card" v-for="msg in msgList" :key="msg.PM_NO">
-        <div class="card-body font"
+        <div class="card-body"
             @click="toMsgView(msg.PM_NO)">
 
           <div class="badge" v-if="msg.RD_YN == 0">✿</div>
@@ -110,8 +110,6 @@ export default {
 
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-
   .listDiv{
     border: 1px solid green;
     border-radius: 1.1em;
@@ -131,11 +129,6 @@ export default {
   .nameDiv{
     font-size: larger;
     text-decoration-line: underline;
-  }
-
-  .font{
-    font-family: "Nanum Gothic";
-    text-shadow : 0px 1px;
   }
 
   .card-body{

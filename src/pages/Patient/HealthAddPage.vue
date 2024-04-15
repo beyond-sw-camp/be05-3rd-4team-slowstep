@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row mb-2 mt-3 font">
+    <div class="row mb-2 mt-3">
       <div class="col-5">
           <h2>건강 정보 입력</h2>
       </div>
@@ -11,12 +11,12 @@
     </div>
 
     <div class="flex_item_right">
-        <button class="btn btn-success font mb-4" v-on:click="toPatientMain">뒤로가기</button>
+        <button class="btn btn-success mb-4" v-on:click="toPatientMain">뒤로가기</button>
       </div>
 
-    <div class="row">
+    <div class="row row-border pt-3">
       <form v-on:submit.prevent="healthAdd">
-        <table class="table table-borderless font table-success">
+        <table class="table table-borderless ">
           <tbody>
             <tr>
               <td style="text-align:center;">혈압</td>
@@ -37,7 +37,7 @@
           </tbody>
         </table>
         <div class="flex_item_center">
-          <button class="btn btn-success btn-lg font">등록</button>
+          <button class="btn btn-success btn-lg mb-3">등록</button>
         </div>
         
       </form>
@@ -133,7 +133,6 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
   .row{
     font-size: larger;
@@ -147,9 +146,9 @@ export default {
     display: flex;
     justify-content: center;
   }
-
-  .font{
-    font-family: "Nanum Gothic";
-    text-shadow : 0px 1px;
+  .row-border{
+    border: 0.5px solid green;
+    border-radius: 1em;
   }
+
 </style>

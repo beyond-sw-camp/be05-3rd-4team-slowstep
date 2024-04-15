@@ -2,16 +2,16 @@
   <div class="container">
     <div class="row mb-2 mt-5">
       <div class="col-9" >
-        <label class="nameDiv font">건강정보 내역</label>
+        <label class="nameDiv">건강정보 내역</label>
       </div>
       <div class="col-3 flex" >
-        <button class="btn btn-success font" v-on:click="toHealthView">뒤로가기</button>
+        <button class="btn btn-success font" v-on:click="toMain">뒤로가기</button>
       </div>
     </div>
 
     <div class=" listDiv">
       <div class="card" v-for="(health ,index) in healthList" :key="health.ptHthInfoNo">
-        <div class="card-body font"
+        <div class="card-body"
             @click="toHealthView(health.ptHthInfoNo, index)">
 
           {{ health.inspDt }}
@@ -63,7 +63,7 @@ export default {
 
     const toMain = () => {
       router.push({
-        name : "UserMain"
+        name : "PatientMain"
       })
     }
 
@@ -79,8 +79,6 @@ export default {
 
 
 <style scoped>
-
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
   .listDiv{
     border: 1px solid green;
@@ -101,11 +99,6 @@ export default {
   .nameDiv{
     font-size: larger;
     text-decoration-line: underline;
-  }
-
-  .font{
-    font-family: "Nanum Gothic";
-    text-shadow : 0px 1px;
   }
 
   .card-body{
