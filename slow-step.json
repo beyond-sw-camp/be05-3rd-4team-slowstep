@@ -1,0 +1,281 @@
+{
+    "ad_drug_info": [
+      {
+        "AD_DRUG_INFO_NO": 1,
+        "PT_HTH_INFO_NO": 1,
+        "DRUG_NM": "타이레놀",
+        "DRUG_AD_FREQ": "BID"
+      },
+      {
+        "AD_DRUG_INFO_NO": 2,
+        "PT_HTH_INFO_NO": 1,
+        "DRUG_NM": "타이레놀",
+        "DRUG_AD_FREQ": "BID"
+      }
+    ],
+    "ch_rn": [
+      {
+        "RN_NO": 2,
+        "RN_JBPS": "수간호사"
+      }
+    ],
+    "exam_info": [
+      {
+        "EXAM_NO": 1,
+        "PT_NO": 1,
+        "RX_CN": "dummy prescription",
+        "DIS_NM": "dummy disease",
+        "PIC_MD_NM": "Dr. Dummy",
+        "EXAM_YMD": "2024-04-16"
+      },
+      {
+        "EXAM_NO": 2,
+        "PT_NO": 2,
+        "RX_CN": "another dummy prescription",
+        "DIS_NM": "another dummy disease",
+        "PIC_MD_NM": "Dr. Another Dummy",
+        "EXAM_YMD": "2024-04-16"
+      }
+    ],
+    "mbr": [
+      {
+        "MBR_NO": 1,
+        "MBR_NM": "박돌팔",
+        "MBR_PWD": "1234",
+        "MBR_RRNO": "000222-3333333",
+        "MBR_EML": "dolpal@gmail.com",
+        "MBR_TELNO": "010-4444-4444",
+        "OGDP_INST_NM": "서울대학교병원",
+        "JOB_TYP": "D"
+      },
+      {
+        "MBR_NO": 2,
+        "MBR_NM": "김간호",
+        "MBR_PWD": "5678",
+        "MBR_RRNO": "000111-5555555",
+        "MBR_EML": "ganho@naver.com",
+        "MBR_TELNO": "010-6666-6666",
+        "OGDP_INST_NM": "노인요양병원",
+        "JOB_TYP": "N"
+      },
+      {
+        "MBR_NO": 3,
+        "MBR_NM": "홍길동",
+        "MBR_PWD": "abcd",
+        "MBR_RRNO": "999999-1111111",
+        "MBR_EML": "test@naver.com",
+        "MBR_TELNO": "010-1111-1111",
+        "OGDP_INST_NM": "우리병원",
+        "JOB_TYP": "D"
+      }
+    ],
+    "md_pt_rn_rel": [
+      {
+        "REL_NO": 1,
+        "PT_NO": 1,
+        "MD_NO": 1,
+        "RN_NO": 2
+      },
+      {
+        "REL_NO": 2,
+        "PT_NO": 2,
+        "MD_NO": 3,
+        "RN_NO": 2
+      }
+    ],
+    "pm": [
+      {
+        "PM_NO": 1,
+        "PM_RM_NO": 1,
+        "PM_CN": "Hi",
+        "TRSM_DIR": "1",
+        "PM_DSPTCH_DT": "2024-03-25 00:00:00",
+        "RD_YN": "1",
+        "RD_DT": "2024-03-25 17:23:09",
+        "DELETE_YN": "0",
+        "DELETE_DT": null
+      },
+      {
+        "PM_NO": 2,
+        "PM_RM_NO": 1,
+        "PM_CN": "Bye",
+        "TRSM_DIR": "0",
+        "PM_DSPTCH_DT": "2024-03-25 00:00:00",
+        "RD_YN": "1",
+        "RD_DT": "2024-03-25 17:26:50",
+        "DELETE_YN": "0",
+        "DELETE_DT": null
+      },
+      {
+        "PM_NO": 3,
+        "PM_RM_NO": 1,
+        "PM_CN": "New",
+        "TRSM_DIR": "1",
+        "PM_DSPTCH_DT": "2024-03-25 00:00:00",
+        "RD_YN": "0",
+        "RD_DT": null,
+        "DELETE_YN": "1",
+        "DELETE_DT": "2024-03-25 17:27:00"
+      },
+      {
+        "PM_NO": 4,
+        "PM_RM_NO": 1,
+        "PM_CN": "Old",
+        "TRSM_DIR": "0",
+        "PM_DSPTCH_DT": "2024-03-25 00:00:00",
+        "RD_YN": "0",
+        "RD_DT": null,
+        "DELETE_YN": "1",
+        "DELETE_DT": "2024-03-25 16:31:07"
+      },
+      {
+        "PM_NO": 5,
+        "PM_RM_NO": 1,
+        "PM_CN": "good",
+        "TRSM_DIR": "1",
+        "PM_DSPTCH_DT": "2024-03-26 00:00:00",
+        "RD_YN": "1",
+        "RD_DT": "2024-03-26 15:40:08",
+        "DELETE_YN": "0",
+        "DELETE_DT": null
+      },
+      {
+        "PM_NO": 6,
+        "PM_RM_NO": 1,
+        "PM_CN": "bad",
+        "TRSM_DIR": "0",
+        "PM_DSPTCH_DT": "2024-03-26 00:00:00",
+        "RD_YN": "1",
+        "RD_DT": "2024-03-26 15:42:59",
+        "DELETE_YN": "0",
+        "DELETE_DT": null
+      },
+      {
+        "PM_NO": 7,
+        "PM_RM_NO": 1,
+        "PM_CN": "middle",
+        "TRSM_DIR": "1",
+        "PM_DSPTCH_DT": "2024-03-26 00:00:00",
+        "RD_YN": "1",
+        "RD_DT": "2024-03-26 15:42:23",
+        "DELETE_YN": "1",
+        "DELETE_DT": "2024-03-26 16:06:11"
+      },
+      {
+        "PM_NO": 8,
+        "PM_RM_NO": 1,
+        "PM_CN": "low",
+        "TRSM_DIR": "1",
+        "PM_DSPTCH_DT": "2024-03-26 00:00:00",
+        "RD_YN": "1",
+        "RD_DT": "2024-03-26 16:16:23",
+        "DELETE_YN": "1",
+        "DELETE_DT": "2024-03-27 09:44:27"
+      },
+      {
+        "PM_NO": 9,
+        "PM_RM_NO": 1,
+        "PM_CN": "dummy message 1",
+        "TRSM_DIR": "1",
+        "PM_DSPTCH_DT": "2024-04-16 00:00:00",
+        "RD_YN": "0",
+        "RD_DT": null,
+        "DELETE_YN": "0",
+        "DELETE_DT": null
+      },
+      {
+        "PM_NO": 10,
+        "PM_RM_NO": 1,
+        "PM_CN": "dummy message 2",
+        "TRSM_DIR": "0",
+        "PM_DSPTCH_DT": "2024-04-16 00:00:00",
+        "RD_YN": "0",
+        "RD_DT": null,
+        "DELETE_YN": "0",
+        "DELETE_DT": null
+      }
+    ],
+    "pm_rm": [
+      {
+        "PM_RM_NO": 1,
+        "MD_NO": 1,
+        "RN_NO": 2
+      },
+      {
+        "PM_RM_NO": 2,
+        "MD_NO": 2,
+        "RN_NO": 1
+      },
+      {
+        "PM_RM_NO": 3,
+        "MD_NO": 3,
+        "RN_NO": 2
+      },
+      {
+        "PM_RM_NO": 4,
+        "MD_NO": 3,
+        "RN_NO": 2
+      }
+    ],
+    "pt": [
+      {
+        "PT_NO": 1,
+        "PT_NM": "환자1",
+        "PT_BRYMD": "1970-01-01",
+        "PT_GNDR": 1,
+        "PT_RRNO": "123456-1234567",
+        "PRTCR_NM": "보호자1",
+        "PRTCR_TELNO": "010-1234-5678",
+        "PT_ROOM": "병실101",
+        "ADMS_YMD": "2024-04-16",
+        "DISCH_YMD": "2999-12-31"
+      },
+      {
+        "PT_NO": 2,
+        "PT_NM": "환자2",
+        "PT_BRYMD": "1980-02-02",
+        "PT_GNDR": 0,
+        "PT_RRNO": "234567-2345678",
+        "PRTCR_NM": "보호자2",
+        "PRTCR_TELNO": "010-2345-6789",
+        "PT_ROOM": "병실102",
+        "ADMS_YMD": "2024-04-16",
+        "DISCH_YMD": "2999-12-31"
+      }
+    ],
+    "pt_hth_info": [
+      {
+        "PT_HTH_INFO_NO": 1,
+        "PT_NO": 1,
+        "PT_BP": 120.0,
+        "PT_BST": 70.0,
+        "PT_WT": 60.0,
+        "PT_HR": 80,
+        "INSP_DT": "2024-04-16 08:00:00"
+      },
+      {
+        "PT_HTH_INFO_NO": 2,
+        "PT_NO": 2,
+        "PT_BP": 130.0,
+        "PT_BST": 80.0,
+        "PT_WT": 70.0,
+        "PT_HR": 90,
+        "INSP_DT": "2024-04-16 09:00:00"
+      }
+    ],
+    "uh_md": [
+      {
+        "MD_NO": 1,
+        "MD_PIC_DEPT": "신경외과"
+      },
+      {
+        "MD_NO": 2,
+        "MD_PIC_DEPT": "정형외과"
+      },
+      {
+        "MD_NO": 3,
+        "MD_PIC_DEPT": "내과"
+      }
+    ]
+  }
+  
