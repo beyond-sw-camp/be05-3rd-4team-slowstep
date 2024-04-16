@@ -4,11 +4,12 @@
       <!-- Left Panel for Nurses List -->
       <div class="card nurses-list">
         <h3 class="card-header">쪽지</h3>
-        <ul class="list-group">
-          <li class="list-group-item" v-for="nurse in nurses" :key="nurse" @click="selectNurse(nurse)">
-            {{ nurse }}
-          </li>
-        </ul>
+        <div class="list-group">
+          <div class="list-group-item nurse-card" v-for="nurse in nurses" :key="nurse.name" @click="selectNurse(nurse)">
+            {{ nurse.name }}
+            <i v-if="nurse.hasMessage" class="fas fa-bell message-icon"></i>
+          </div>
+        </div>
       </div>
 
       <!-- Right Panel for Patients List -->
@@ -19,11 +20,7 @@
           <div class="patient-info" v-for="(patient, index) in patients" :key="index" @click="selectPatient(patient)">
             <div class="patient-box">
               <!-- 이미지 -->
-              <img
-                src="@/assets/patient_woman.png"
-                alt="Woman Image"
-                class="rounded-image"
-              >
+              <img src="@/assets/patient_woman.png" alt="Woman Image" class="rounded-image">
               <!-- 요양원 이름 및 환자 정보 -->
               <div class="info-and-button">
                 <div class="hospital-name">느린마음 요양원</div>
@@ -46,7 +43,13 @@
 export default {
 data() {
   return {
-    nurses: ['간호사 : 김철수', '간호사 : 강동원', '간호사 : 정우성', '간호사 : 차은우', '간호사 : 김수현'],
+    nurses: [
+      { name: '간호사 : 김철수', hasMessage: true },
+      { name: '간호사 : 강동원', hasMessage: false },
+      { name: '간호사 : 정우성', hasMessage: false },
+      { name: '간호사 : 차은우', hasMessage: true },
+      { name: '간호사 : 김수현', hasMessage: false }
+    ],
     patients: [
       { name: '홍길동', age: 65, gender: '남성' },
       { name: '홍길순', age: 70, gender: '여성' },
@@ -59,6 +62,7 @@ data() {
 methods: {
   selectNurse(nurse) {
     console.log('선택한 간호사:', nurse);
+    this.$router.push({name: 'MsgList', params: { id: nurse}});
   },
   selectPatient(patient) {
     console.log('선택한 환자:', patient.name);
@@ -115,12 +119,30 @@ methods: {
   padding: 15px 20px;
   border-bottom: 1px solid #eee;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* 변환 및 그림자 효과의 전환 속도 조정 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-bottom: 10px; /* 각 항목 사이의 간격 */
+}
+
+.list-group-item.has-message {
+  color: red;
+  font-weight: bold;
 }
 
 .list-group-item:hover {
-  background-color: #f7f7f7;
+  transform: translateY(-5px); /* Y축 이동 효과 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 강조된 그림자 효과 */
+  background-color: #f7f7f7; /* 배경 색 변경 */
 }
+.message-icon {
+  color:red; /* 아이콘 색상 변경, 필요에 따라 조정 가능 */
+  font-size: 1.2em; /* 아이콘 크기 조정 */
+}
+
 
 .card-content {
   overflow-y: auto;
