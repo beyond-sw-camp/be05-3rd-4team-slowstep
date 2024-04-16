@@ -27,7 +27,7 @@
       <!-- 두 번째 카드 -->
     <div>
       <span style="font-size: 24px;">건강 정보</span>
-      <button class="btn btn-success" @click="addRecord" style="float : right;">+</button>
+      <button class="btn btn-success" @click="toHealthAdd" style="float : right;">+</button>
       <div class="card second-card" style=" width: 45rem; height: 16rem; margin-top:1rem;">
         <div class="card-body">
           <h6 class="card-subtitle mb-2 text-body-secondary">OOOO년 OO월 OO일 OO시 OO분 업데이트</h6>
@@ -49,7 +49,7 @@
     <div>
       
       <span style="font-size: 24px;">진료 기록</span>
-      <button class="btn btn-success mb-3" @click="addRecord" style="float : right;">+</button>
+      <button class="btn btn-success mb-3" @click="toExamAdd" style="float : right;">+</button>
       <div class="card" style="overflow: scroll; width: 100%; height: 250px; padding: 10px;">
         <ul class="list-group list-group-flush">
           <!-- 각 아이템을 li 요소로 나타내고 클릭 시 해당 아이템의 상세 페이지로 이동 -->
@@ -59,6 +59,8 @@
         </ul>
       </div>
     </div>
+    
+    <button class="btn btn-success" @click="toMain" style="float : right; margin-top:1rem; margin-bottom: 1rem;">뒤로 가기</button>
   </div>
 </template>
 
@@ -90,6 +92,21 @@ export default {
     toHealthList() {
       // 메인 페이지로 이동
       this.$router.push({ name: 'HealthList' });
+    },
+
+    toHealthAdd() {
+      // 메인 페이지로 이동
+      this.$router.push({ name: 'HealthAdd' });
+    },
+
+    toExamAdd() {
+      // 메인 페이지로 이동
+      this.$router.push({ name: 'ExamAdd' });
+    },
+
+    toMain() {
+      // 메인 페이지로 이동
+      this.$router.push({ name: 'UserMain' });
     }
   }
 };
