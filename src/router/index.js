@@ -12,6 +12,7 @@ import HealthAdd from "@/pages/Patient/HealthAddPage.vue";
 import ExamAdd from "@/pages/Patient/ExamAddPage.vue";
 import ExamView from "@/pages/Patient/ExamViewpage.vue";
 import Find from "@/pages/User/FindPage.vue";
+import Modify from "@/pages/User/PwdModifyPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -25,6 +26,11 @@ const router = createRouter({
       path: "/find",
       name: "Find",
       component: Find,
+    },
+    {
+      path: "/modify",
+      name: "Modify",
+      component: Modify,
     },
     {
       path: "/user/main",
