@@ -88,8 +88,6 @@ export default {
 </script>
 
 <style scoped>
-.indent {
-}
 .back {
   position: absolute;
   margin-left: 160px;
