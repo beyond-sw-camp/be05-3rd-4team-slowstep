@@ -48,7 +48,7 @@ const router = createRouter({
       component: MsgAdd,
     },
     {
-      path: "/msg/view",
+      path: "/msg/view/:id",
       name: "MsgView",
       component: MsgView,
     },
@@ -80,7 +80,7 @@ const router = createRouter({
     },
 
     {
-      path: "/patient/exam/view",
+      path: "/patient/exam/view/:id",
       name: "ExamView",
       component: ExamView,
     },

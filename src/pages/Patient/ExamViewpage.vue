@@ -4,35 +4,20 @@
       <div class="col-4">
         <div class="fromDiv">
           <div><h2>진료기록 입력</h2></div>
-          <div><h2>김점순 환자</h2></div>
+          <div>
+            <h2>{{ ptInfo.PT_NM }}</h2>
+          </div>
         </div>
       </div>
       <div class="col-5">
         <div class="input-group">
           <span class="input-group-text">기록날짜</span>
           <input
-            type="text"
+            type="date"
             aria-label="Year"
-            class="form-control indent"
-            placeholder="년"
-            value="2024년"
+            class="form-control"
             readonly
-          />
-          <input
-            type="text"
-            aria-label="Month"
-            class="form-control indent"
-            placeholder="월"
-            value="02월"
-            readonly
-          />
-          <input
-            type="text"
-            aria-label="Day"
-            class="form-control indent"
-            placeholder="일"
-            value="18일"
-            readonly
+            v-model="examInfo.EXAM_YMD"
           />
         </div>
       </div>
@@ -53,7 +38,9 @@
             aria-label="With textarea"
             rows="10"
             readonly
+            v-model="examInfo.DIS_NM"
           >
+          
   당 수치가 많이 낮아졌음
   귤을 많이 줄이셔야 할 것 같다.</textarea
           >
@@ -77,8 +64,9 @@
             aria-label="With textarea"
             rows="5"
             readonly
+            v-model="examInfo.RX_CN"
           >
- 큐로켈정 12.5mg</textarea
+진료 내역</textarea
           >
         </div>
       </div>
@@ -99,18 +87,58 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import axios from "axios";
+import { ref } from "vue";
+
 export default {
   setup() {
+    const route = useRoute();
     const router = useRouter();
+    let examInfo = ref({});
+    let ptInfo = ref({});
     const toPatientMain = () => {
       router.push({
         name: "PatientMain",
       });
     };
 
+    const getExamInfo = async () => {
+      let url = `http://localhost:3000/exam_info`;
+
+      axios(url)
+        .then((res) => {
+          examInfo.value = res.data[route.params.id - 1];
+          console.log(examInfo.value);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+
+    const getPtInfo = () => {
+      let url = `http://localhost:3000/pt`;
+
+      axios(url)
+        .then((res) => {
+          ptInfo.value = res.data[route.params.id - 1];
+          console.log(ptInfo.value);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+
+    getExamInfo();
+
+    getPtInfo();
+
     return {
       toPatientMain,
+      examInfo,
+      getExamInfo,
+      ptInfo,
+      getPtInfo,
     };
   },
 };

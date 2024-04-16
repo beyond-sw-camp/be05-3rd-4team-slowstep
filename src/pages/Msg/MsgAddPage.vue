@@ -6,9 +6,8 @@
           <input
             class="form-control"
             type="text"
-            placeholder="제목을 입력해 주세요"
+            placeholder="이름을 입력해 주세요"
             value="OOO 간호사."
-            readonly
           />
         </div>
       </div>
