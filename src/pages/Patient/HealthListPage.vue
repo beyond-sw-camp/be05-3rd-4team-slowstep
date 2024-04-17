@@ -33,8 +33,11 @@ export default {
     let healthList = ref([]);
 
     const getHealthList = () => {
-      let url = "pt_hth_info";
-      // 메인 페이지 구현시 수정 : PT_NO=환자번호
+
+      const patient = localStorage.getItem("TargetPtNo");
+      console.log( "TargetPtNo : ",patient);
+
+      let url = `pt_hth_info?PT_NO=${patient}`;
 
       axios(url)
         .then( res => {

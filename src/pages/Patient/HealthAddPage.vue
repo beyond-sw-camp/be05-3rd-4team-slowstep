@@ -5,7 +5,7 @@
           <h2>건강 정보 입력</h2>
       </div>
       <div class="col-7">
-        <h2>oo 환자</h2>
+        <h2>{{ptNm}} 님</h2>
         <!-- vuex로 전역변수 구현시 수정 -->
       </div>  
     </div>
@@ -72,6 +72,24 @@ export default {
 
     // const healthInfo = JSON.parse(history.state.data);
     // console.log(healthInfo);
+
+    const ptNm = ref();
+    const ptNo = localStorage.getItem("TargetPtNo");
+    const getPtNm = () => {
+      let url = `/pt?PT_NO=${ptNo}`;
+
+      axios(url)
+      .then( res => {
+        console.log(res.data[0]);
+        ptNm.value = res.data[0].PT_NM;
+      }).catch (err => {
+        console.log(err.message);
+      })
+    }
+
+    getPtNm();
+
+    // ---------
 
     const ptBp = ref("");
     const ptBst = ref("");
@@ -154,6 +172,7 @@ export default {
     }
 
     return{
+      ptNm,
       toPatientMain,
       getLength,
       ptBp,

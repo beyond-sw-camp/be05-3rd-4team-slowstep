@@ -5,7 +5,7 @@
           <h2>{{ healthInfo.inspDt }}</h2>
       </div>
       <div class="col-7">
-        <h2>oo 환자</h2>
+        <h2>{{ptNm}} 님</h2>
         <!-- PT_NM 꺼내기-->
       </div>  
     </div>
@@ -49,33 +49,33 @@
 </template>
 
 <script>
-import {useRoute, useRouter} from 'vue-router';
-import {ref} from "vue"
-import axios from "@/axios";
+import {useRouter} from 'vue-router';
+import {ref} from 'vue';
+import axios from "@/axios"
 
 export default {
   setup(){
-    const route = useRoute();
+    // const route = useRoute();
     // console.log(route.params.id);
 
     const healthInfo = JSON.parse(history.state.data);
     // console.log(healthInfo);
 
-    let drugInfo = ref([]);
-    const getDrugInfo = () => {
-      let url = "/ad_drug_info?PT_HTH_INFO_NO=" + route.params.id;
+    const ptNm = ref();
+    const ptNo = localStorage.getItem("TargetPtNo");
+    const getPtNm = () => {
+      let url = `/pt?PT_NO=${ptNo}`;
 
       axios(url)
-        .then(res => {
-          drugInfo.value = res.data;
-          console.log(drugInfo.value);
-        })
-        .catch(err => {
-          console.log(err.message);
-        })
+      .then( res => {
+        console.log(res.data[0]);
+        ptNm.value = res.data[0].PT_NM;
+      }).catch (err => {
+        console.log(err.message);
+      })
     }
 
-    getDrugInfo();
+    getPtNm();
 
     const router = useRouter();
     const toHealthList = () => {
@@ -86,9 +86,8 @@ export default {
 
     return{
       healthInfo,
-      drugInfo,
-      getDrugInfo,
-      toHealthList
+      toHealthList,
+      ptNm
     }
   }
 }
