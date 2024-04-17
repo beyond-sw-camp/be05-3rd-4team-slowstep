@@ -134,8 +134,7 @@ export default {
       let data = {
         "id" : index+1,
         "PT_HTH_INFO_NO": index+1,
-        "PT_NO": 1,
-        // vuex 사용시 수정
+        "PT_NO": ptNo,
         "PT_BP": ptBp.value,
         "PT_BST": ptBst.value,
         "PT_WT": ptWt.value,
