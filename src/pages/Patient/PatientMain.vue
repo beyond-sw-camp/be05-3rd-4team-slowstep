@@ -125,6 +125,8 @@ const router = useRouter(); // useRouter를 사용하여 router 객체를 가져
 const rnNo = ref(0);
 const ogdpInstNm = ref("");
 
+localStorage.setItem("patient",JSON.stringify(ptInfo));
+
 const loadRnNo = async () => {
   try{
     const rnNoResponse = await axios.get('http://localhost:3000/md_pt_rn_rel');
