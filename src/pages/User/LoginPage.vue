@@ -42,15 +42,13 @@ export default {
       } catch(e) {
         isLoggedIn.value = true;
       }
+      localStorage.setItem("response",JSON.stringify(response));
 
       if(isLoggedIn.value) {
         console.log("happy")
       } else {
         router.push({
-          name: "UserMain",
-          state: {
-            data: JSON.stringify(response.data[0])
-          }
+          name: "UserMain"
         })
       }
     }
