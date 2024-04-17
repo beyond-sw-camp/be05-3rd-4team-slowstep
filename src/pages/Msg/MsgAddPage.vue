@@ -17,11 +17,7 @@
       </div>
       <div class="row mt-4 mb-2">
         <div class="col-11">
-          <input
-            class="form-control"
-            type="text"
-            placeholder="제목을 입력해 주세요"
-          />
+          <input class="form-control" type="datetime-local" />
         </div>
       </div>
       <div class="row mt-2">
