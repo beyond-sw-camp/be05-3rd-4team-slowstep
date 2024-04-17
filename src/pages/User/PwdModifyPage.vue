@@ -20,7 +20,7 @@
 <script>
 import {useRouter} from 'vue-router';
 import {ref} from 'vue';
-
+import axios from "@/axios";
 export default {
   setup() {
     let now = ref('');
@@ -37,7 +37,13 @@ export default {
       if(now.value === response.MBR_PWD) {
         if(change.value !== now.value) {
           if(change.value === changecon.value) {
-            console.log("okay")
+            axios.patch("mbr", {MBR_PWD: change.value})
+            .then(response => {
+              console.log(response.status);
+            })
+            .catch(error => {
+              console.log(error.message);
+            })
           } else {
             window.alert("새로운 비밀번호와 비밀번호 확인이 다릅니다");
           }
