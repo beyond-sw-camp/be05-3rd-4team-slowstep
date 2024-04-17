@@ -34,6 +34,10 @@
               <td style="text-align:center;">심박수</td>
               <td><input v-model="ptHr" type="text" class="form-control"></td>
             </tr>
+            <tr>
+              <td style="text-align:center;">복용약물</td>
+              <td><input v-model="drug" type="text" class="form-control"></td>
+            </tr>
           </tbody>
         </table>
         <div class="flex_item_center">
@@ -73,6 +77,7 @@ export default {
     const ptBst = ref("");
     const ptWt = ref("");
     const ptHr = ref("");
+    const drug = ref("");
 
     const isNull = ref(false);
     const result = ref(false);
@@ -117,6 +122,7 @@ export default {
         "PT_BST": ptBst.value,
         "PT_WT": ptWt.value,
         "PT_HR": ptHr.value,
+        "DRUG_NM" : drug.value,
         "INSP_DT": dateString + " " + timeString
       }
       // null값 검증 필요
@@ -154,6 +160,7 @@ export default {
       ptBst,
       ptWt,
       ptHr,
+      drug,
       result,
       isNull
     }
