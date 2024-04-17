@@ -3,7 +3,6 @@
     <br />
 
     <!-- 환자 정보 및 건강 정보 -->
-
     <div class="card-container">
       <!-- 첫 번째 카드: 환자 정보 -->
       <div>
@@ -30,9 +29,10 @@
               "
             />
             <div>
-              <h3 class="card-title">OOOO 요양원</h3>
-              <p class="card-text" style="font-size: 50px; margin-right: 7rem">
-                OOO
+              <h3 class="card-title">{{ ogdpInstNm }}</h3>
+              <!-- ptInfo 객체가 존재할 때만 PT_NM을 렌더링 -->
+              <p class="card-text" style="font-size: 40px;">
+                <b>{{ ptInfo.PT_NM }}</b>
               </p>
             </div>
           </div>
@@ -113,96 +113,153 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router'; // vue-router에서 useRouter를 import
 
-export default {
-  data() {
-    return {
-      latestHealthRecord: null, // 최근 건강 정보
-      examInfo: [] // 전체 진료 정보 데이터 배열
-    };
-  },
-  computed: {
-    filteredExamInfo() {
-      // PT_NO가 1인 데이터만 필터링
-      return this.examInfo.filter(item => item.PT_NO === 1);
-    }
-  },
-  methods: {
-    // 환자 정보 및 건강 정보 데이터 로드
-    async loadPatientData() {
-      try {
-        const examInfoResponse = await axios.get('http://localhost:3000/exam_info');
-        if (Array.isArray(examInfoResponse.data)) {
-          const filteredExamInfo = examInfoResponse.data.filter(item => item.PT_NO === 1);
-          if (filteredExamInfo.length > 0) {
-            this.examInfo = filteredExamInfo;
-            // 최근 건강 정보 설정
-            this.latestHealthRecord = filteredExamInfo[0];
-          } else {
-            console.warn('No exam records found for PT_NO 1');
-          }
-        } else {
-          console.error('Invalid response data format:', examInfoResponse.data);
-        }
-      } catch (error) {
-        console.error('Error loading patient data:', error);
+const latestHealthRecord = ref(null);
+const examInfo = ref([]);
+const ptInfo = ref({});
+const router = useRouter(); // useRouter를 사용하여 router 객체를 가져옴
+const rnNo = ref(0);
+const ogdpInstNm = ref("");
+
+localStorage.setItem("patient",JSON.stringify(ptInfo));
+
+const loadRnNo = async () => {
+  try{
+    const rnNoResponse = await axios.get('http://localhost:3000/md_pt_rn_rel');
+    if (Array.isArray(rnNoResponse.data)) {
+      const filteredRnNo = rnNoResponse.data.filter(item => item.PT_NO === 1);
+      if (filteredRnNo.length > 0) {
+        rnNo.value = filteredRnNo[0].RN_NO;
+        return rnNo;
+      } else {
+        console.warn('No exam records found for PT_NO 1');
       }
-    },
-
-    // 건강 정보 데이터 로드
-    async loadPatientHealthInfo() {
-      try {
-        const healthInfoResponse = await axios.get('http://localhost:3000/pt_hth_info');
-        if (Array.isArray(healthInfoResponse.data)) {
-          const filteredHealthInfo = healthInfoResponse.data.filter(item => item.PT_NO === 1);
-          if (filteredHealthInfo.length > 0) {
-            this.latestHealthRecord = filteredHealthInfo.reduce((prev, current) => {
-              return (new Date(current.INSP_DT) > new Date(prev.INSP_DT)) ? current : prev;
-            });
-          } else {
-            console.warn('No health records found for PT_NO 1');
-          }
-        } else {
-          console.warn('Invalid response data format:', healthInfoResponse.data);
-        }
-      } catch (error) {
-        console.error('Error loading patient health info:', error);
-      }
-    },
-
-    // 건강 정보 상세내역 페이지로 이동
-    toHealthList() {
-      this.$router.push({ name: "HealthList" });
-    },
-
-    // 건강 정보 추가 페이지로 이동
-    toHealthAdd() {
-      this.$router.push({ name: "HealthAdd" });
-    },
-
-    // 진료 정보 추가 페이지로 이동
-    toExamAdd() {
-      this.$router.push({ name: "ExamAdd" });
-    },
-
-    // 메인 페이지로 이동
-    toMain() {
-      this.$router.push({ name: "UserMain" });
-    },
-
-    // 진료 기록 상세 페이지로 이동
-    goToExamView(examNo) {
-      this.$router.push(`/patient/exam/view/${examNo}`);
     }
-  },
-  mounted() {
-    // 컴포넌트가 마운트될 때 환자 정보 데이터 및 건강 정보 데이터 로드
-    this.loadPatientData();
-    this.loadPatientHealthInfo();
+  } catch(error){
+    console.error('Error loading RN_NO data:', error);
   }
 };
+
+const loadOgdpInstNm = async () => {
+  try{
+    const ogdpInstNmResponse = await axios.get('http://localhost:3000/mbr');
+    if (Array.isArray(ogdpInstNmResponse.data)) {
+      const filteredOgdpInstNm = ogdpInstNmResponse.data.filter(item => item.MBR_NO === rnNo.value);
+      if (filteredOgdpInstNm.length > 0) {
+        ogdpInstNm.value = filteredOgdpInstNm[0].OGDP_INST_NM;
+        return ogdpInstNm;
+      } else {
+        console.warn('No exam records found for PT_NO 1');
+      }
+    }
+  } catch(error){
+    console.error('Error loading OGDP data:', error);
+  }
+}
+
+// 환자 정보 및 건강 정보 데이터 로드
+const loadPatientData = async () => {
+  try {
+    const examInfoResponse = await axios.get('http://localhost:3000/exam_info');
+    if (Array.isArray(examInfoResponse.data)) {
+      const filteredExamInfo = examInfoResponse.data.filter(item => item.PT_NO === 1);
+      if (filteredExamInfo.length > 0) {
+        examInfo.value = filteredExamInfo;
+        // 최근 건강 정보 설정
+        latestHealthRecord.value = filteredExamInfo[0];
+      } else {
+        console.warn('No exam records found for PT_NO 1');
+      }
+    } else {
+      console.error('Invalid response data format:', examInfoResponse.data);
+    }
+  } catch (error) {
+    console.error('Error loading patient data:', error);
+  }
+};
+
+// 환자 정보
+const loadPatientInfo = async () =>{
+  try {
+    const ptInfoResponse = await axios.get('http://localhost:3000/pt');
+    if (Array.isArray(ptInfoResponse.data)) {
+      const filteredPtInfo = ptInfoResponse.data.filter(item => item.PT_NO === 1);
+      if (filteredPtInfo.length > 0) {
+        ptInfo.value = filteredPtInfo[0];
+      } else {
+        console.warn('No exam records found for PT_NO 1');
+      }
+    } else {
+      console.error('Invalid response data format:', ptInfoResponse.data);
+    }
+  } catch (error) {
+    console.error('Error loading patient Info:', error);
+  }
+};
+
+// 건강 정보 데이터 로드
+const loadPatientHealthInfo = async () => {
+  try {
+    const healthInfoResponse = await axios.get('http://localhost:3000/pt_hth_info');
+    if (Array.isArray(healthInfoResponse.data)) {
+      const filteredHealthInfo = healthInfoResponse.data.filter(item => item.PT_NO === 1);
+      if (filteredHealthInfo.length > 0) {
+        latestHealthRecord.value = filteredHealthInfo.reduce((prev, current) => {
+          return (new Date(current.INSP_DT) > new Date(prev.INSP_DT)) ? current : prev;
+        });
+      } else {
+        console.warn('No health records found for PT_NO 1');
+      }
+    } else {
+      console.warn('Invalid response data format:', healthInfoResponse.data);
+    }
+  } catch (error) {
+    console.error('Error loading patient health info:', error);
+  }
+};
+
+// 건강 정보 상세내역 페이지로 이동
+const toHealthList = () => {
+  router.push({ name: "HealthList" });
+};
+
+// 건강 정보 추가 페이지로 이동
+const toHealthAdd = () => {
+  router.push({ name: "HealthAdd" });
+};
+
+// 진료 정보 추가 페이지로 이동
+const toExamAdd = () => {
+  router.push({ name: "ExamAdd" });
+};
+
+// 메인 페이지로 이동
+const toMain = () => {
+  router.push({ name: "UserMain" });
+};
+
+// 진료 기록 상세 페이지로 이동
+const goToExamView = (examNo) => {
+  router.push(`/patient/exam/view/${examNo}`);
+};
+
+onMounted(() => {
+  // 컴포넌트가 마운트될 때 환자 정보 데이터 및 건강 정보 데이터 로드
+  loadPatientData();
+  loadPatientHealthInfo();
+  loadPatientInfo();
+  loadRnNo();
+  loadOgdpInstNm();
+});
+
+// computed 속성으로 필터된 examInfo 반환
+const filteredExamInfo = computed(() => {
+  return examInfo.value.filter(item => item.PT_NO === 1);
+});
 </script>
 
 <style scoped>
