@@ -6,7 +6,7 @@
         <h3 class="card-header">쪽지</h3>
         <div class="list-group">
           <div class="list-group-item nurse-card" v-for="nurse in nurses" :key="nurse.MBR_NM" @click="selectNurse(nurse)">
-            간호사 : {{ nurse.MBR_NM }}
+            {{ loginUser.JOB_TYP === "D" ? '간호사' : '의사' }} : {{ nurse.MBR_NM }}
             <i v-if="nurse.hasMessage" class="fas fa-bell message-icon"></i>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default {
             });
             nurses.value = filteredNurses;
           }else{
-            const filteredNurses = response.data.filter(nurse => nurse.JOB_TYP === 'N').map(nurse => {
+            const filteredNurses = response.data.filter(nurse => nurse.JOB_TYP === 'D').map(nurse => {
               return { ...nurse, hasMessage: Math.random() > 0.5 };
             });
             nurses.value = filteredNurses;
@@ -126,6 +126,7 @@ export default {
       selectNurse,
       selectPatient,
       viewPatientDetail,
+      loginUser
     };
   }
 };

@@ -215,6 +215,7 @@ const loadPatientHealthInfo = async () => {
         (item) => item.PT_NO === ptNo
       );
       if (filteredHealthInfo.length > 0) {
+
         latestHealthRecord.value = filteredHealthInfo.reduce((prev, current) => {
           return (new Date(current.INSP_DT) > new Date(prev.INSP_DT)) ? current : prev;
         });

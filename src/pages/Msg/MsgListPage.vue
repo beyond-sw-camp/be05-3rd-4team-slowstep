@@ -2,7 +2,10 @@
   <div class="container">
     <div class="row mb-2 mt-5">
       <div class="col-9" >
-        <label class="nameDiv">{{targetRn}}님</label>
+
+        <!-- 로그인 구현시 수정 -->
+        <label class="nameDiv">{{ targetRn.JOB_TYP === 'N' ? '간호사' : '의사' }} {{ targetRn.MBR_NM }}님</label>
+
       </div>
       <div class="col-3 flex" >
         <button class="btn btn-success" v-on:click="toMain">뒤로가기</button>
