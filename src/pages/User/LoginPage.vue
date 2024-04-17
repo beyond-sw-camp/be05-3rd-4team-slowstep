@@ -1,6 +1,9 @@
 <template>
   <div class="head" align="center">
     <h1>Log In</h1>
+    <label class="warning" v-show="isLoggedIn" align="center">
+    이메일 또는 비밀번호를 확인하세요!
+    </label>
   </div>
   <div align="center" class="email">
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="이메일을 입력하세요" v-model="email">
@@ -22,30 +25,28 @@ export default {
 
   setup() {
     const router = useRouter();
-    let isLoggedIn = false;
+    let isLoggedIn = ref(false);
     const email = ref('');
     const pwd = ref('');
     let response = '';
     const toLogIn = async () => {
       try {
         response = await axios.get(`mbr?MBR_EML=${email.value}`);
-        console.log(response.data);
-        console.log(response.data[0].MBR_PWD)
         if(response.data[0].MBR_PWD === `${pwd.value}`) {
-          isLoggedIn = true;
+          isLoggedIn.value = false;
         } else {
-          isLoggedIn = false;
+          isLoggedIn.value = true;
         }
       } catch(e) {
-        console.log("e")
+        isLoggedIn.value = true;
       }
 
-      if(isLoggedIn) {
+      if(isLoggedIn.value) {
+        console.log("happy")
+      } else {
         router.push({
           name: "UserMain"
         })
-      } else {
-        console.log("happy")
       }
     }
     const toFind = () => {
@@ -58,7 +59,8 @@ export default {
       toFind,
       email,
       pwd,
-      response
+      response,
+      isLoggedIn
     }
   }
 }
@@ -67,11 +69,9 @@ export default {
 <style scoped>
  .head {
       margin-top: 10%;
+      margin-bottom: 5%;
     }
-    .email {
-      margin-top: 5%;
-    }
-    .password {
+   .password {
       margin-top: 2%;
     }
     .login {
@@ -84,5 +84,9 @@ export default {
     }
     .form-control {
       width: 30%;
+    }
+    .warning {
+      margin-top: 2%;
+      color: red;
     }
 </style>
