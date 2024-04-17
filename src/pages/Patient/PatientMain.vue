@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <br />
-
     <!-- 환자 정보 및 건강 정보 -->
     <div class="card-container">
       <!-- 첫 번째 카드: 환자 정보 -->
@@ -31,14 +30,13 @@
             <div>
               <h3 class="card-title">{{ ogdpInstNm }}</h3>
               <!-- ptInfo 객체가 존재할 때만 PT_NM을 렌더링 -->
-              <p class="card-text" style="font-size: 40px;">
+              <p class="card-text" style="font-size: 40px">
                 <b>{{ ptInfo.PT_NM }}</b>
               </p>
             </div>
           </div>
         </div>
       </div>
-
       <!-- 두 번째 카드: 건강 정보 -->
       <div>
         <span style="font-size: 24px"><b>건강 정보</b></span>
@@ -46,24 +44,32 @@
           class="btn btn-success"
           @click="toHealthAdd"
           style="float: right"
-        ><b>+</b></button>
+        >
+          <b>+</b>
+        </button>
         <div
           class="card second-card"
           style="width: 45rem; height: 16rem; margin-top: 1rem"
         >
           <div class="card-body">
             <h6 class="card-subtitle mb-2 text-body-secondary">
-              {{ latestHealthRecord ? latestHealthRecord.INSP_DT : 'Loading...' }} 업데이트
+              {{
+                latestHealthRecord ? latestHealthRecord.INSP_DT : "Loading..."
+              }}
+              업데이트
             </h6>
             <br />
             <p class="card-text" style="font-size: 20px">
-              최고 혈압 : {{ latestHealthRecord ? latestHealthRecord.PT_BP : 'N/A' }}
+              최고 혈압 :
+              {{ latestHealthRecord ? latestHealthRecord.PT_BP : "N/A" }}
             </p>
             <p class="card-text" style="font-size: 20px">
-              공복 혈당 : {{ latestHealthRecord ? latestHealthRecord.PT_BST : 'N/A' }}
+              공복 혈당 :
+              {{ latestHealthRecord ? latestHealthRecord.PT_BST : "N/A" }}
             </p>
             <p class="card-text" style="font-size: 20px">
-              심박수 : {{ latestHealthRecord ? latestHealthRecord.PT_HR : 'N/A' }}
+              심박수 :
+              {{ latestHealthRecord ? latestHealthRecord.PT_HR : "N/A" }}
             </p>
             <div class="flex_item">
               <!-- 버튼 클릭 시 건강정보 상세내역으로 이동 -->
@@ -75,7 +81,6 @@
         </div>
       </div>
     </div>
-
     <!-- 진료 기록 -->
     <br />
     <div>
@@ -84,7 +89,9 @@
         class="btn btn-success mb-3"
         @click="toExamAdd"
         style="float: right"
-      ><b>+</b></button>
+      >
+        <b>+</b>
+      </button>
       <div
         class="card"
         style="overflow: scroll; width: 100%; height: 250px; padding: 10px"
@@ -92,7 +99,7 @@
         <ul class="list-group list-group-flush">
           <li
             class="list-group-item"
-            v-for="item in filteredExamInfoSorted"  
+            v-for="item in filteredExamInfoSorted"
             :key="item.EXAM_NO"
             @click="goToExamView(item.EXAM_NO)"
           >
@@ -101,7 +108,6 @@
         </ul>
       </div>
     </div>
-
     <!-- 뒤로 가기 버튼 -->
     <button
       class="btn btn-success"
@@ -112,137 +118,149 @@
     </button>
   </div>
 </template>
-
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import axios from 'axios';
-import { useRouter } from 'vue-router'; // vue-router에서 useRouter를 import
-
+import { ref, onMounted, computed } from "vue";
+import axios from "axios";
+import { useRouter } from "vue-router"; // vue-router에서 useRouter를 import
 const latestHealthRecord = ref(null);
 const examInfo = ref([]);
 const ptInfo = ref({});
 const router = useRouter(); // useRouter를 사용하여 router 객체를 가져옴
-const rnNo = ref(0);  
+const rnNo = ref(0);
 const ogdpInstNm = ref("");
 
 const ptNo = JSON.parse(localStorage.getItem("TargetPtNo"));
 
 localStorage.setItem("patient", JSON.stringify(ptInfo.value));
-
 const loadRnNo = async () => {
-  try{
-    const rnNoResponse = await axios.get('http://localhost:3000/md_pt_rn_rel');
+  try {
+    const rnNoResponse = await axios.get("http://localhost:3000/md_pt_rn_rel");
     if (Array.isArray(rnNoResponse.data)) {
-      const filteredRnNo = rnNoResponse.data.filter(item => item.PT_NO === ptNo);
+      const filteredRnNo = rnNoResponse.data.filter(
+        (item) => item.PT_NO === ptNo
+      );
       if (filteredRnNo.length > 0) {
         rnNo.value = filteredRnNo[0].RN_NO;
         return rnNo;
       } else {
-        console.warn('No exam records found for PT_NO');
+        console.warn("No exam records found for PT_NO");
       }
     }
-  } catch(error){
-    console.error('Error loading RN_NO data:', error);
+  } catch (error) {
+    console.error("Error loading RN_NO data:", error);
   }
 };
-
 const loadOgdpInstNm = async () => {
-  try{
-    const ogdpInstNmResponse = await axios.get('http://localhost:3000/mbr');
+  try {
+    const ogdpInstNmResponse = await axios.get("http://localhost:3000/mbr");
     if (Array.isArray(ogdpInstNmResponse.data)) {
-      const filteredOgdpInstNm = ogdpInstNmResponse.data.filter(item => item.MBR_NO === rnNo.value);
+      const filteredOgdpInstNm = ogdpInstNmResponse.data.filter(
+        (item) => item.MBR_NO === rnNo.value
+      );
       if (filteredOgdpInstNm.length > 0) {
         ogdpInstNm.value = filteredOgdpInstNm[0].OGDP_INST_NM;
         return ogdpInstNm;
       } else {
-        console.warn('No exam records found for PT_NO');
+        console.warn("No exam records found for PT_NO");
       }
     }
-  } catch(error){
-    console.error('Error loading OGDP data:', error);
+  } catch (error) {
+    console.error("Error loading OGDP data:", error);
   }
-}
-
+};
 // 환자 정보 및 건강 정보 데이터 로드
 const loadPatientData = async () => {
   try {
-    const examInfoResponse = await axios.get('http://localhost:3000/exam_info');
+    const examInfoResponse = await axios.get("http://localhost:3000/exam_info");
     if (Array.isArray(examInfoResponse.data)) {
-      examInfo.value = examInfoResponse.data.filter(item => item.PT_NO === ptNo);
+      examInfo.value = examInfoResponse.data.filter(
+        (item) => item.PT_NO === ptNo
+      );
       latestHealthRecord.value = examInfo.value[0];
     } else {
-      console.error('Invalid response data format:', examInfoResponse.data);
+      console.error("Invalid response data format:", examInfoResponse.data);
     }
   } catch (error) {
-    console.error('Error loading patient data:', error);
+    console.error("Error loading patient data:", error);
   }
 };
 // 환자 정보
-const loadPatientInfo = async () =>{
+const loadPatientInfo = async () => {
   try {
-    const ptInfoResponse = await axios.get('http://localhost:3000/pt');
+    const ptInfoResponse = await axios.get("http://localhost:3000/pt");
     if (Array.isArray(ptInfoResponse.data)) {
-      const filteredPtInfo = ptInfoResponse.data.filter(item => item.PT_NO === ptNo);
+      const filteredPtInfo = ptInfoResponse.data.filter(
+        (item) => item.PT_NO === ptNo
+      );
       if (filteredPtInfo.length > 0) {
         ptInfo.value = filteredPtInfo[0];
       } else {
-        console.warn('No exam records found for PT_NO');
+        console.warn("No exam records found for PT_NO");
       }
     } else {
-      console.error('Invalid response data format:', ptInfoResponse.data);
+      console.error("Invalid response data format:", ptInfoResponse.data);
     }
   } catch (error) {
-    console.error('Error loading patient Info:', error);
+    console.error("Error loading patient Info:", error);
   }
 };
-
 // 건강 정보 데이터 로드
 const loadPatientHealthInfo = async () => {
   try {
-    const healthInfoResponse = await axios.get('http://localhost:3000/pt_hth_info');
+    const healthInfoResponse = await axios.get(
+      "http://localhost:3000/pt_hth_info"
+    );
     if (Array.isArray(healthInfoResponse.data)) {
-      const filteredHealthInfo = healthInfoResponse.data.filter(item => item.PT_NO === ptNo);
+      const filteredHealthInfo = healthInfoResponse.data.filter(
+        (item) => item.PT_NO === ptNo
+      );
       if (filteredHealthInfo.length > 0) {
+<<<<<<< Updated upstream
         latestHealthRecord.value = filteredHealthInfo.reduce((prev, current) => {
           return (new Date(current.INSP_DT) > new Date(prev.INSP_DT)) ? current : prev;
         });
         console.log(latestHealthRecord);
       } else {
         console.warn('No health records found for PT_NO');
+=======
+        latestHealthRecord.value = filteredHealthInfo.reduce(
+          (prev, current) => {
+            return new Date(current.INSP_DT) > new Date(prev.INSP_DT)
+              ? current
+              : prev;
+          }
+        );
+      } else {
+        console.warn("No health records found for PT_NO 1");
+>>>>>>> Stashed changes
       }
     } else {
-      console.warn('Invalid response data format:', healthInfoResponse.data);
+      console.warn("Invalid response data format:", healthInfoResponse.data);
     }
   } catch (error) {
-    console.error('Error loading patient health info:', error);
+    console.error("Error loading patient health info:", error);
   }
 };
-
 // 건강 정보 상세내역 페이지로 이동
 const toHealthList = () => {
   router.push({ name: "HealthList" });
 };
-
 // 건강 정보 추가 페이지로 이동
 const toHealthAdd = () => {
   router.push({ name: "HealthAdd" });
 };
-
 // 진료 정보 추가 페이지로 이동
 const toExamAdd = () => {
   router.push({ name: "ExamAdd" });
 };
-
 // 메인 페이지로 이동
 const toMain = () => {
   router.push({ name: "UserMain" });
 };
-
 // 진료 기록 상세 페이지로 이동
 const goToExamView = (examNo) => {
   router.push(`/patient/exam/view/${examNo}`);
 };
-
 onMounted(() => {
   // 컴포넌트가 마운트될 때 환자 정보 데이터 및 건강 정보 데이터 로드
   loadPatientData();
@@ -251,43 +269,35 @@ onMounted(() => {
   loadRnNo();
   loadOgdpInstNm();
 });
-
 // computed 속성으로 필터된 examInfo 반환
 const filteredExamInfo = computed(() => {
-  return examInfo.value.filter(item => item.PT_NO === ptNo);
+  return examInfo.value.filter((item) => item.PT_NO === ptNo);
 });
-
 const filteredExamInfoSorted = computed(() => {
   return filteredExamInfo.value.slice().sort((a, b) => {
     return new Date(b.EXAM_YMD) - new Date(a.EXAM_YMD);
   });
 });
 </script>
-
 <style scoped>
 .card-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-
 .flex_item {
   display: flex;
   justify-content: flex-end;
 }
-
 .list-group-item {
   cursor: pointer;
 }
-
 .list-group-item:hover {
   background-color: #e6ffee;
 }
-
 .rounded-image {
   border-radius: 100%;
 }
-
 .card {
   border: 1px solid green;
 }

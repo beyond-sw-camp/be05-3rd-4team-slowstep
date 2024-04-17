@@ -42,7 +42,8 @@
           >
           
   당 수치가 많이 낮아졌음
-  귤을 많이 줄이셔야 할 것 같다.</textarea>
+  귤을 많이 줄이셔야 할 것 같다.</textarea
+          >
         </div>
       </div>
 
@@ -97,7 +98,7 @@ export default {
     let examInfo = ref({});
     // const ptNo = ptObj.PT_NO;
     // console.log(ptNo);
-    
+
     let ptInfo = JSON.parse(localStorage.getItem("patient"));
     console.log(ptInfo);
 
@@ -107,13 +108,14 @@ export default {
       });
     };
 
-    const getExamInfo = async () => {
+    const getExamInfo = () => {
       let url = `exam_info`;
 
       axios(url)
         .then((res) => {
           examInfo.value = res.data[route.params.id - 1];
           console.log(examInfo.value);
+          console.log(ptInfo.value);
         })
         .catch((err) => {
           console.log(err.message);
@@ -136,12 +138,13 @@ export default {
     getExamInfo();
 
     // getPtInfo();
+    // getPtInfo();
 
     return {
       toPatientMain,
       examInfo,
       getExamInfo,
-      ptInfo
+      ptInfo,
       // getPtInfo,
     };
   },

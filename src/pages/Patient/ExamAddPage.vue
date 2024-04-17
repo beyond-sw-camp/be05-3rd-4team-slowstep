@@ -77,10 +77,11 @@
         </button>
       </div>
 
-      <div v-if="ifNull" class="alert alert-danger mt-4">
-        공백은 입력될 수 없습니다.
-      </div>
       <div class="col-3"></div>
+    </div>
+
+    <div v-if="ifNull" class="alert alert-danger mt-4">
+      공백은 입력될 수 없습니다.
     </div>
   </div>
 </template>
@@ -96,6 +97,7 @@ export default {
     const EXAM_YMD = ref("");
     const DIS_NM = ref("");
     const examInfo = ref("");
+    const ptInfo = ref("");
 
     const router = useRouter();
     const toPatientMain = () => {
@@ -122,9 +124,9 @@ export default {
         EXAM_YMD.value.length == 0
       ) {
         ifNull.value = true;
-        console.log("asdasd");
+        console.log("등록실패");
       } else {
-        console.log(1234);
+        console.log("등록완료");
         axios(url, { method: "POST", data: data })
           .then((res) => {
             console.log(res.data);
@@ -148,7 +150,21 @@ export default {
         });
     };
 
+    const getPtInfo = () => {
+      let url = `pt`;
+
+      axios(url)
+        .then((res) => {
+          ptInfo.value = res.data;
+          console.log(ptInfo.value);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+
     getExamInfo();
+    getPtInfo();
 
     return {
       toPatientMain,
@@ -158,6 +174,8 @@ export default {
       EXAM_YMD,
       DIS_NM,
       RX_CN,
+      getPtInfo,
+      ptInfo,
     };
   },
 };
