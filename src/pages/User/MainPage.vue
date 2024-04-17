@@ -6,7 +6,7 @@
         <h3 class="card-header">쪽지</h3>
         <div class="list-group">
           <div class="list-group-item nurse-card" v-for="nurse in nurses" :key="nurse.MBR_NM" @click="selectNurse(nurse)">
-            {{ nurse.MBR_NM }}
+            간호사 : {{ nurse.MBR_NM }}
             <i v-if="nurse.hasMessage" class="fas fa-bell message-icon"></i>
           </div>
         </div>
@@ -100,6 +100,7 @@ export default {
     const selectNurse = (nurse) => {
       console.log('선택한 간호사:', nurse.MBR_NM);
       router.push({ name: 'MsgList', params: { id: nurse.MBR_NO }});
+      localStorage.setItem("TargetRn",JSON.stringify(nurse));
     };
 
     const selectPatient = (patient) => {
