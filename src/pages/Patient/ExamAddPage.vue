@@ -106,12 +106,13 @@ export default {
       });
     };
 
+    const ptNo = localStorage.getItem("TargetPtNo");
     const examAdd = () => {
       let url = `exam_info`;
       let data = {
         id: examInfo.value + 1,
         EXAM_NO: examInfo.value + 1,
-        PT_NO: 1,
+        PT_NO: Number(ptNo),
         RX_CN: RX_CN.value,
         DIS_NM: DIS_NM.value,
         EXAM_YMD: EXAM_YMD.value,
