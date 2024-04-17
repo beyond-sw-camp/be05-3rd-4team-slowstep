@@ -40,6 +40,15 @@
       "DIS_NM": "another dummy disease",
       "PIC_MD_NM": "Dr. Another Dummy",
       "EXAM_YMD": "2024-04-16"
+    },
+    {
+      "id": 3,
+      "EXAM_NO": 3,
+      "PT_NO": 1,
+      "RX_CN": "Hi",
+      "DIS_NM": "Hi",
+      "EXAM_YMD": "2024-04-18",
+      "PIC_MD_NM": ""
     }
   ],
   "mbr": [
@@ -319,6 +328,16 @@
       "ptWt": "70",
       "ptHr": "80",
       "inspDt": "2024-04-17 15:18:17"
+    },
+    {
+      "id": 6,
+      "ptHthInfoNo": 6,
+      "ptNo": 1,
+      "ptBp": "1",
+      "ptBst": "1",
+      "ptWt": "1",
+      "ptHr": "1",
+      "inspDt": "2024-04-17 15:41:02"
     }
   ],
   "uh_md": [
