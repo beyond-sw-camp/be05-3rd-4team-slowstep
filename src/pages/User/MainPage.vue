@@ -111,6 +111,7 @@ export default {
       router.push({ name: 'PatientMain', state : { 
         data : JSON.stringify(patient)
        } });
+       localStorage.setItem("TargetPtNo",JSON.stringify(patient.PT_NO));
     };
 
     onMounted(() => {

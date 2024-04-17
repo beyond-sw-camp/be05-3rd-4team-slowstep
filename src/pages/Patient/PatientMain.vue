@@ -122,11 +122,10 @@ const latestHealthRecord = ref(null);
 const examInfo = ref([]);
 const ptInfo = ref({});
 const router = useRouter(); // useRouter를 사용하여 router 객체를 가져옴
-const rnNo = ref(0);
+const rnNo = ref(0);  
 const ogdpInstNm = ref("");
 
-const ptObj = JSON.parse(history.state.data);
-const ptNo = ptObj.PT_NO;
+const ptNo = JSON.parse(localStorage.getItem("TargetPtNo"));
 
 localStorage.setItem("patient", JSON.stringify(ptInfo.value));
 
