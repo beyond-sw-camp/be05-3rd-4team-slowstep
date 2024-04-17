@@ -17,11 +17,11 @@
             @click="toMsgView(msg.PM_NO)">
 
             <div class="row" >
-              <div class="col-10" >
-                {{ msg.PM_CN }}
-              </div>
               <div class="col-1">
                 <i v-if="msg.RD_YN == 0" class="fas fa-bell message-icon" ></i>
+              </div>
+              <div class="col-11" >
+                {{ msg.PM_CN }}
               </div>
             </div>
 
@@ -36,42 +36,41 @@
 <script>
 import {ref} from "vue"
 import {useRouter} from 'vue-router';
-import axios from "axios";
+import axios from "@/axios";
 
 export default {
   setup(){
 
-    let msgList = ref([{
-        "PM_RM_NO": "1",
-        "RD_YN": "1",
-        "PM_CN": "김옥례 환자 관련 연락드립니다.",
-        "PM_NO": "1",
-        "TRSM_DIR": "0",
-        "PM_DSPTCH_DT": "2024-03-26 00:00:00",
-        "RD_DT": "2024-03-26 17:24:38"
-      },
-      {
-        "PM_RM_NO": "1",
-        "RD_YN": "0",
-        "PM_CN": "네.",
-        "PM_NO": "2",
-        "TRSM_DIR": "1",
-        "PM_DSPTCH_DT": "2024-03-26 00:00:00",
-        "RD_DT": "2024-03-26 17:27:19"
-      }]);
-    // 로그인 구현시 수정
+    let msgList = ref([]);
+    
+    let pmRmNo = 0; 
+
+    const getPmRm = () => {
+      let url = "/pm_rm?MD_NO=1&RN_NO=2";
+      // 로그인 구현시 수정
+      axios(url)
+        .then( res => {
+          pmRmNo = res.data[0].PM_RM_NO;
+          console.log(pmRmNo);
+
+          getMsgList();
+        })
+        .catch( err => {
+          console.log(err);
+        })
+    }
+    
+    getPmRm();
 
     const getMsgList = () => {
-      let url = "http://localhost:7777/pmrm/view/2";
-      // 로그인 구현시 수정
-      let data = {
-          "pmRmNo": 1,
-          "mdNo": 1,
-          "rnNo": 1
-      }
 
-      axios(url, data)
+      let url = `/pm?PM_RM_NO=${pmRmNo}&TRSM_DIR=0`;
+      // 로그인 구현시 수정
+      console.log(url);
+
+      axios(url)
         .then( res => {
+          console.log(res);
           msgList.value = res.data;
         })
         .catch( err => {
@@ -79,8 +78,6 @@ export default {
         })
       
     }
-
-    // getMsgList();
 
     const router = useRouter();
     const toMsgView = (PM_NO) => {
@@ -175,5 +172,9 @@ export default {
   .message-icon {
     color:red; /* 아이콘 색상 변경, 필요에 따라 조정 가능 */
     font-size: 1.2em; /* 아이콘 크기 조정 */
+  }
+
+  .col-2{
+    overflow: hidden;
   }
 </style>

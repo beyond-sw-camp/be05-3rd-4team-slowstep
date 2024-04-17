@@ -12,9 +12,9 @@
     <div class=" listDiv">
       <div class="card" v-for="(health ,index) in healthList" :key="health.ptHthInfoNo">
         <div class="card-body"
-            @click="toHealthView(health.ptHthInfoNo, index)">
+            @click="toHealthView(health.PT_HTH_INFO_NO, index)">
 
-          {{ health.inspDt }}
+          {{ health.INSP_DT }}
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
 <script>
 import {ref} from "vue"
 import {useRouter} from 'vue-router';
-import axios from "axios";
+import axios from "@/axios";
 
 export default {
   setup(){
@@ -33,11 +33,12 @@ export default {
     let healthList = ref([]);
 
     const getHealthList = () => {
-      let url = "http://localhost:7777/all/pt_hth_info/1";
+      let url = "pt_hth_info";
       // 메인 페이지 구현시 수정
 
       axios(url)
         .then( res => {
+          console.log(res.data);
           healthList.value = res.data;
         })
         .catch( err => {
