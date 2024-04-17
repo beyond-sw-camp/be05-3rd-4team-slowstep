@@ -69,7 +69,12 @@
         <button class="btn btn-success back" v-on:click="toPatientMain">
           뒤로가기
         </button>
-        <button class="btn btn-success regi" v-on:click="examAdd">등록</button>
+        <button
+          class="btn btn-success regi"
+          v-on:click="[toPatientMain(), examAdd()]"
+        >
+          등록
+        </button>
       </div>
 
       <div v-if="ifNull" class="alert alert-danger mt-4">
@@ -104,7 +109,7 @@ export default {
       let data = {
         id: examInfo.value + 1,
         EXAM_NO: examInfo.value + 1,
-        PT_NO: 3,
+        PT_NO: 1,
         RX_CN: RX_CN.value,
         DIS_NM: DIS_NM.value,
         EXAM_YMD: EXAM_YMD.value,
