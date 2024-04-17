@@ -5,6 +5,7 @@
     이메일 또는 비밀번호를 확인하세요!
     </label>
   </div>
+  <form v-on:submit.prevent="toLogIn">
   <div align="center" class="email">
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="이메일을 입력하세요" v-model="email">
   </div>
@@ -13,8 +14,9 @@
   </div>
     <label class="find" @click="toFind">아이디/비밀번호찾기</label>
   <div align="center" class="login">
-    <button type="button" class="btn btn-success" @click="toLogIn">로그인</button>
+    <button class="btn btn-success">로그인</button>
   </div>
+</form>
 </template>
 
 <script>
