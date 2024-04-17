@@ -110,14 +110,14 @@ export default {
 
       let data = {
         "id" : index+1,
-        "ptHthInfoNo": index+1,
-        "ptNo": 1,
+        "PT_HTH_INFO_NO": index+1,
+        "PT_NO": 1,
         // vuex 사용시 수정
-        "ptBp": ptBp.value,
-        "ptBst": ptBst.value,
-        "ptWt": ptWt.value,
-        "ptHr": ptHr.value,
-        "inspDt": dateString + " " + timeString
+        "PT_BP": ptBp.value,
+        "PT_BST": ptBst.value,
+        "PT_WT": ptWt.value,
+        "PT_HR": ptHr.value,
+        "INSP_DT": dateString + " " + timeString
       }
       // null값 검증 필요
 
