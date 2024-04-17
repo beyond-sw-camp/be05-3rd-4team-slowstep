@@ -33,6 +33,33 @@
       "DIS_NM": "Hi",
       "EXAM_YMD": "2024-04-18",
       "PIC_MD_NM": ""
+    },
+    {
+      "id": 4,
+      "EXAM_NO": 4,
+      "PT_NO": 1,
+      "RX_CN": "Bye",
+      "DIS_NM": "Bye",
+      "EXAM_YMD": "2024-04-19",
+      "PIC_MD_NM": ""
+    },
+    {
+      "id": 5,
+      "EXAM_NO": 5,
+      "PT_NO": 1,
+      "RX_CN": "!!",
+      "DIS_NM": "!!",
+      "EXAM_YMD": "2024-04-01",
+      "PIC_MD_NM": ""
+    },
+    {
+      "id": 6,
+      "EXAM_NO": 6,
+      "PT_NO": 1,
+      "RX_CN": "@",
+      "DIS_NM": "@",
+      "EXAM_YMD": "2024-04-04",
+      "PIC_MD_NM": ""
     }
   ],
   "mbr": [
