@@ -60,14 +60,12 @@ export default {
       });
     };
 
-    if (pmInfo.value.RD_YN === 0) {
-      updatePmInfo();
-    }
 
     const updatePmInfo = () => {
       let url = `pm/${route.params.id}`;
+      console.log(url);
       let data = {
-        RD_YN: 1,
+        RD_YN: "1"
       };
 
       axios(url, { method: "PATCH", data: data })
@@ -87,6 +85,11 @@ export default {
           pmInfo.value = res.data[route.params.id - 1];
           console.log(pmInfo.value);
           console.log(pmInfo.value.PM_DSPTCH_DT);
+
+          if (pmInfo.value.RD_YN === "0") {
+              console.log("happy");
+              updatePmInfo();
+          }
         })
         .catch((err) => {
           console.log(err.message);

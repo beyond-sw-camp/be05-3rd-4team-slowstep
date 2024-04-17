@@ -181,7 +181,7 @@
       "PM_CN": "New",
       "TRSM_DIR": "1",
       "PM_DSPTCH_DT": "2024-03-25 00:00:00",
-      "RD_YN": "0",
+      "RD_YN": 1,
       "RD_DT": null,
       "DELETE_YN": "1",
       "DELETE_DT": "2024-03-25 17:27:00"
@@ -193,7 +193,7 @@
       "PM_CN": "Old",
       "TRSM_DIR": "0",
       "PM_DSPTCH_DT": "2024-03-25 00:00:00",
-      "RD_YN": "0",
+      "RD_YN": "1",
       "RD_DT": null,
       "DELETE_YN": "1",
       "DELETE_DT": "2024-03-25 16:31:07"
