@@ -6,7 +6,7 @@
       </div>
       <div class="col-7">
         <h2>oo 환자</h2>
-        <!-- vuex로 전역변수 구현시 수정 -->
+        <!-- PT_NM 꺼내기-->
       </div>  
     </div>
 
