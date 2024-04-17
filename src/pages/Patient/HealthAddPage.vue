@@ -15,7 +15,7 @@
       </div>
 
     <div class="row row-border pt-3">
-      <form v-on:submit.prevent="healthAdd">
+      <form v-on:submit.prevent="getLength()">
         <table class="table table-borderless ">
           <tbody>
             <tr>
@@ -58,7 +58,7 @@
 <script>
 import {useRouter} from 'vue-router';
 import {ref} from "vue"
-import axios from 'axios';
+import axios from '@/axios';
 // import axios from "axios";
 
 export default {
@@ -77,18 +77,47 @@ export default {
     const isNull = ref(false);
     const result = ref(false);
 
-    const healthAdd = () => {
+    const getLength = () => {
+      let url = "/pt_hth_info";
 
-      let url = "http://localhost:7777/all/post_pt_hth_info";
+      axios(url)
+        .then( res => {
+          console.log(res.data.length);
+
+          healthAdd(res.data.length);
+        } ) 
+        .catch( err => {
+          console.log(err.message);
+        })
+    }
+
+    const healthAdd = (index) => {
+
+      let url = "/pt_hth_info";
+
+      var today = new Date();
+
+      var year = today.getFullYear();
+      var month = ('0' + (today.getMonth() + 1)).slice(-2);
+      var day = ('0' + today.getDate()).slice(-2);
+      var dateString = year + '-' + month  + '-' + day;
+
+      var hours = ('0' + today.getHours()).slice(-2); 
+      var minutes = ('0' + today.getMinutes()).slice(-2);
+      var seconds = ('0' + today.getSeconds()).slice(-2); 
+
+      var timeString = hours + ':' + minutes  + ':' + seconds;
+
       let data = {
-        "ptHthInfoNo": 0,
+        "id" : index+1,
+        "ptHthInfoNo": index+1,
         "ptNo": 1,
         // vuex 사용시 수정
         "ptBp": ptBp.value,
         "ptBst": ptBst.value,
         "ptWt": ptWt.value,
         "ptHr": ptHr.value,
-        "inspDt": ""
+        "inspDt": dateString + " " + timeString
       }
       // null값 검증 필요
 
@@ -120,7 +149,7 @@ export default {
 
     return{
       toPatientMain,
-      healthAdd,
+      getLength,
       ptBp,
       ptBst,
       ptWt,

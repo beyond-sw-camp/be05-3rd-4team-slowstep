@@ -11,7 +11,7 @@
       "id": 2,
       "AD_DRUG_INFO_NO": 2,
       "PT_HTH_INFO_NO": 1,
-      "DRUG_NM": "타이레놀",
+      "DRUG_NM": "이브프로펜",
       "DRUG_AD_FREQ": "BID"
     }
   ],
@@ -289,6 +289,36 @@
       "PT_WT": 70,
       "PT_HR": 90,
       "INSP_DT": "2024-04-16 09:00:00"
+    },
+    {
+      "ptHthInfoNo": 3,
+      "ptNo": 1,
+      "ptBp": "100",
+      "ptBst": "90",
+      "ptWt": "80",
+      "ptHr": "70",
+      "inspDt": "",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "ptHthInfoNo": 4,
+      "ptNo": 1,
+      "ptBp": "100",
+      "ptBst": "70",
+      "ptWt": "60",
+      "ptHr": "50",
+      "inspDt": "2024-04-17"
+    },
+    {
+      "id": 5,
+      "ptHthInfoNo": 5,
+      "ptNo": 1,
+      "ptBp": "80",
+      "ptBst": "90",
+      "ptWt": "70",
+      "ptHr": "80",
+      "inspDt": "2024-04-17 15:18:17"
     }
   ],
   "uh_md": [

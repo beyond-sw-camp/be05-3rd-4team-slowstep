@@ -15,23 +15,26 @@
         <tbody>
           <tr>
             <td style="text-align:center;">혈압</td>
-            <td>{{healthInfo.ptBp}} mm Hg</td>
+            <td>{{healthInfo.PT_BP}} mm Hg</td>
           </tr>
           <tr>
             <td style="text-align:center;">공복혈당</td>
-            <td>{{healthInfo.ptBst}} mg/dl</td>
+            <td>{{healthInfo.PT_BST}} mg/dl</td>
           </tr>
           <tr>
             <td style="text-align:center;">체중</td>
-            <td>{{healthInfo.ptWt}} kg</td>
+            <td>{{healthInfo.PT_WT}} kg</td>
           </tr>
           <tr>
             <td style="text-align:center;">심박수</td>
-            <td>{{healthInfo.ptHr}} bpm</td>
+            <td>{{healthInfo.PT_HR}} bpm</td>
           </tr>
           <tr>
             <td style="text-align:center;">현재 복용 약물</td>
-            <td>{{drugInfo != null ? drugInfo.drugNm : "복용 약물 없음"}}</td>
+            <td v-if="drugInfo.length == 0" > 복용 약물 없음 </td>
+            <td v-for="drug in drugInfo" :key="drug.id">
+              {{drug.DRUG_NM}}
+            </td>
             <!-- 하루에 여러 약물을 섭취할 경우 v-for을 이용해 처리 -->
           </tr>
         </tbody>
@@ -49,7 +52,7 @@
 <script>
 import {useRoute, useRouter} from 'vue-router';
 import {ref} from "vue"
-import axios from "axios";
+import axios from "@/axios";
 
 export default {
   setup(){
@@ -59,14 +62,14 @@ export default {
     const healthInfo = JSON.parse(history.state.data);
     // console.log(healthInfo);
 
-    let drugInfo = ref({});
+    let drugInfo = ref([]);
     const getDrugInfo = () => {
-      let url = "http://localhost:7777/all/ad_drug_info/" + route.params.id;
+      let url = "/ad_drug_info?PT_HTH_INFO_NO=" + route.params.id;
 
       axios(url)
         .then(res => {
-          drugInfo.value = res.data[0];
-          // console.log(drugInfo.value.drugNm);
+          drugInfo.value = res.data;
+          console.log(drugInfo.value);
         })
         .catch(err => {
           console.log(err.message);
