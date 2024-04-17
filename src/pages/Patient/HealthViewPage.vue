@@ -31,9 +31,8 @@
           </tr>
           <tr>
             <td style="text-align:center;">현재 복용 약물</td>
-            <td v-if="drugInfo.length == 0" > 복용 약물 없음 </td>
-            <td v-for="drug in drugInfo" :key="drug.id">
-              {{drug.DRUG_NM}}
+            <td> 
+              {{healthInfo.DRUG_NM.length == 0 ? "복용 약물 없음" : healthInfo.DRUG_NM }}
             </td>
             <!-- 하루에 여러 약물을 섭취할 경우 v-for을 이용해 처리 -->
           </tr>

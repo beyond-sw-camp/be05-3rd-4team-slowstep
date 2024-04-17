@@ -1,20 +1,4 @@
 {
-  "ad_drug_info": [
-    {
-      "id": 1,
-      "AD_DRUG_INFO_NO": 1,
-      "PT_HTH_INFO_NO": 1,
-      "DRUG_NM": "타이레놀",
-      "DRUG_AD_FREQ": "BID"
-    },
-    {
-      "id": 2,
-      "AD_DRUG_INFO_NO": 2,
-      "PT_HTH_INFO_NO": 1,
-      "DRUG_NM": "이브프로펜",
-      "DRUG_AD_FREQ": "BID"
-    }
-  ],
   "ch_rn": [
     {
       "id": 1,
@@ -287,6 +271,7 @@
       "PT_BST": 70,
       "PT_WT": 60,
       "PT_HR": 80,
+      "DRUG_NM": "타이레놀",
       "INSP_DT": "2024-04-16 08:00:00"
     },
     {
@@ -297,6 +282,7 @@
       "PT_BST": 80,
       "PT_WT": 70,
       "PT_HR": 90,
+      "DRUG_NM": "타이레놀",
       "INSP_DT": "2024-04-16 09:00:00"
     },
     {
@@ -307,6 +293,7 @@
       "PT_BST": "90",
       "PT_WT": "70",
       "PT_HR": "70",
+      "DRUG_NM": "타이레놀",
       "INSP_DT": "2024-04-17 16:19:36"
     },
     {
@@ -317,6 +304,7 @@
       "PT_BST": "123",
       "PT_WT": "123",
       "PT_HR": "123",
+      "DRUG_NM": "타이레놀",
       "INSP_DT": "2024-04-17 16:24:24"
     },
     {
@@ -327,7 +315,41 @@
       "PT_BST": "345435",
       "PT_WT": "34543534",
       "PT_HR": "1233",
+      "DRUG_NM": "타이레놀",
       "INSP_DT": "2024-04-17 16:24:58"
+    },
+    {
+      "id": 6,
+      "PT_HTH_INFO_NO": 6,
+      "PT_NO": 1,
+      "PT_BP": "110",
+      "PT_BST": "80",
+      "PT_WT": "60",
+      "PT_HR": "90",
+      "DRUG_NM": "",
+      "INSP_DT": "2024-04-17 16:47:13"
+    },
+    {
+      "id": 7,
+      "PT_HTH_INFO_NO": 7,
+      "PT_NO": 1,
+      "PT_BP": "110",
+      "PT_BST": "90",
+      "PT_WT": "60",
+      "PT_HR": "90",
+      "DRUG_NM": "",
+      "INSP_DT": "2024-04-17 16:48:40"
+    },
+    {
+      "id": 8,
+      "PT_HTH_INFO_NO": 8,
+      "PT_NO": 1,
+      "PT_BP": "110",
+      "PT_BST": "90",
+      "PT_WT": "70",
+      "PT_HR": "90",
+      "DRUG_NM": "게보",
+      "INSP_DT": "2024-04-17 16:49:28"
     }
   ],
   "uh_md": [
