@@ -5,8 +5,8 @@
       <div class="card nurses-list">
         <h3 class="card-header">쪽지</h3>
         <div class="list-group">
-          <div class="list-group-item nurse-card" v-for="nurse in nurses" :key="nurse.name" @click="selectNurse(nurse)">
-            {{ nurse.name }}
+          <div class="list-group-item nurse-card" v-for="nurse in nurses" :key="nurse.MBR_NM" @click="selectNurse(nurse)">
+            {{ nurse.MBR_NM }}
             <i v-if="nurse.hasMessage" class="fas fa-bell message-icon"></i>
           </div>
         </div>
@@ -40,40 +40,49 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-data() {
-  return {
-    nurses: [
-      { name: '간호사 : 김철수', hasMessage: true },
-      { name: '간호사 : 강동원', hasMessage: false },
-      { name: '간호사 : 정우성', hasMessage: false },
-      { name: '간호사 : 차은우', hasMessage: true },
-      { name: '간호사 : 김수현', hasMessage: false }
-    ],
-    patients: [
-      { name: '홍길동', age: 65, gender: '남성' },
-      { name: '홍길순', age: 70, gender: '여성' },
-      { name: '정광수', age: 72, gender: '남성' },
-      { name: '정광희', age: 68, gender: '여성' },
-      { name: '정황엽', age: 75, gender: '남성' }
-    ]
-  };
-},
-methods: {
-  selectNurse(nurse) {
-    console.log('선택한 간호사:', nurse);
-    this.$router.push({name: 'MsgList', params: { id: nurse}});
+  data() {
+    return {
+      nurses: [],
+      patients: [
+        { name: '홍길동', age: 65, gender: '남성' },
+        { name: '홍길순', age: 70, gender: '여성' },
+        { name: '정광수', age: 72, gender: '남성' },
+        { name: '정광희', age: 68, gender: '여성' },
+        { name: '정황엽', age: 75, gender: '남성' }
+      ]
+    };
   },
-  selectPatient(patient) {
-    console.log('선택한 환자:', patient.name);
+  created() {
+    this.fetchNurses();
   },
-  viewPatientDetail(patient) {
-    console.log('환자 상세 보기:', patient.name);
-    this.$router.push({ name: 'PatientMain', params: { id: patient.name } });
+  methods: {
+    fetchNurses() {
+      axios.get('http://localhost:3000/mbr')
+        .then(response => {
+          this.nurses = response.data.filter(nurse => nurse.JOB_TYP === 'N');
+        })
+        .catch(error => {
+          console.error('간호사 목록을 불러오는 중 에러 발생:', error);
+        });
+    },
+    selectNurse(nurse) {
+      console.log('선택한 간호사:', nurse.MBR_NM);
+      this.$router.push({ name: 'MsgList', params: { id: nurse.MBR_NO }});
+    },
+    selectPatient(patient) {
+      console.log('선택한 환자:', patient.name);
+    },
+    viewPatientDetail(patient) {
+      console.log('환자 상세 보기:', patient.name);
+      this.$router.push({ name: 'PatientMain', params: { id: patient.name } });
+    }
   }
-}
 };
 </script>
+
 
 <style scoped>
 .container {
