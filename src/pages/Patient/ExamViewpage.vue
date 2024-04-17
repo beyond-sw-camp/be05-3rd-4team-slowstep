@@ -88,7 +88,7 @@
 
 <script>
 import { useRoute, useRouter } from "vue-router";
-import axios from "axios";
+import axios from "@/axios";
 import { ref } from "vue";
 
 export default {
@@ -104,7 +104,7 @@ export default {
     };
 
     const getExamInfo = async () => {
-      let url = `http://localhost:3000/exam_info`;
+      let url = `exam_info`;
 
       axios(url)
         .then((res) => {
@@ -117,7 +117,7 @@ export default {
     };
 
     const getPtInfo = () => {
-      let url = `http://localhost:3000/pt`;
+      let url = `pt`;
 
       axios(url)
         .then((res) => {
