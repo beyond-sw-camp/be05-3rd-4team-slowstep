@@ -95,7 +95,10 @@ export default {
     const route = useRoute();
     const router = useRouter();
     let examInfo = ref({});
-    let ptInfo = ref({});
+    
+    let ptInfo = JSON.parse(localStorage.getItem("patient"));
+    console.log(ptInfo);
+
     const toPatientMain = () => {
       router.push({
         name: "PatientMain",
@@ -115,29 +118,29 @@ export default {
         });
     };
 
-    const getPtInfo = () => {
-      let url = `pt`;
+    // const getPtInfo = () => {
+    //   let url = `pt`;
 
-      axios(url)
-        .then((res) => {
-          ptInfo.value = res.data[route.params.id - 1];
-          console.log(ptInfo.value);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    };
+    //   axios(url)
+    //     .then((res) => {
+    //       ptInfo.value = res.data[route.params.id - 1];
+    //       console.log(ptInfo.value);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err.message);
+    //     });
+    // };
 
     getExamInfo();
 
-    getPtInfo();
+    // getPtInfo();
 
     return {
       toPatientMain,
       examInfo,
       getExamInfo,
-      ptInfo,
-      getPtInfo,
+      ptInfo
+      // getPtInfo,
     };
   },
 };

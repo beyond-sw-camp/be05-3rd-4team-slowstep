@@ -125,8 +125,6 @@ const router = useRouter(); // useRouter를 사용하여 router 객체를 가져
 const rnNo = ref(0);
 const ogdpInstNm = ref("");
 
-localStorage.setItem("patient", JSON.stringify(ptInfo.value));
-
 const loadRnNo = async () => {
   try{
     const rnNoResponse = await axios.get('http://localhost:3000/md_pt_rn_rel');
@@ -190,6 +188,7 @@ const loadPatientInfo = async () =>{
       const filteredPtInfo = ptInfoResponse.data.filter(item => item.PT_NO === 1);
       if (filteredPtInfo.length > 0) {
         ptInfo.value = filteredPtInfo[0];
+        localStorage.setItem("patient", JSON.stringify(ptInfo.value));
       } else {
         console.warn('No exam records found for PT_NO 1');
       }
