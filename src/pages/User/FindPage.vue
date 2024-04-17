@@ -6,7 +6,7 @@
     <h4>02-1234-1234</h4>
     <h4>slowstep@slowstep.com</h4>
   </div>
-  <div class="butt">
+  <div class="button">
   <button class="btn btn-success" @click="toGoBack">
     뒤로가기
   </button>
