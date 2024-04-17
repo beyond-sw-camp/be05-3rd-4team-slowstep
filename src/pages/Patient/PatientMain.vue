@@ -55,12 +55,12 @@
         >
           <div class="card-body">
             <h6 class="card-subtitle mb-2 text-body-secondary">
-              OOOO년 OO월 OO일 OO시 OO분 업데이트
+              {{latestHealthRecord.INSP_DT}} 업데이트
             </h6>
             <br />
-            <p class="card-text" style="font-size: 20px">최고 혈압 : OOO</p>
-            <p class="card-text" style="font-size: 20px">최저 혈압 : OOO</p>
-            <p class="card-text" style="font-size: 20px">공복 혈당 : OOO</p>
+            <p class="card-text" style="font-size: 20px">최고 혈압 : {{latestHealthRecord.PT_BP}}</p>
+            <p class="card-text" style="font-size: 20px">공복 혈당 : {{latestHealthRecord.PT_BST}}</p>
+            <p class="card-text" style="font-size: 20px">심박수 : {{latestHealthRecord.PT_HR}}</p>
             <div class="flex_item">
               <!-- 버튼 클릭 시 건강정보 상세내역으로. -->
               <button class="btn btn-success font mt-1" @click="toHealthList">
@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <!-- 환자 진료 내역 -->
+    <!-- 진료 기록 -->
     <br />
     <div>
       <span style="font-size: 24px">진료 기록</span>
@@ -88,14 +88,13 @@
         style="overflow: scroll; width: 100%; height: 250px; padding: 10px"
       >
         <ul class="list-group list-group-flush">
-          <!-- 각 아이템을 li 요소로 나타내고 클릭 시 해당 아이템의 상세 페이지로 이동 -->
           <li
             class="list-group-item"
-            v-for="item in items"
-            :key="item.id"
-            @click="goToExamView(item.id)"
+            v-for="item in filteredExamInfo"
+            :key="item.EXAM_NO"
+            @click="goToExamView(item.EXAM_NO)"
           >
-            {{ item.name }}
+            <b>{{ item.EXAM_YMD }}일 진료 기록</b>
           </li>
         </ul>
       </div>
@@ -112,52 +111,118 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      items: [
-        { id: 1, name: "Item 1" },
-        { id: 2, name: "Item 2" },
-        { id: 3, name: "Item 3" },
-        { id: 4, name: "Item 4" },
-        { id: 5, name: "Item 5" },
-        { id: 6, name: "Item 6" },
-        { id: 7, name: "Item 7" },
-        { id: 8, name: "Item 8" },
-        { id: 9, name: "Item 9" },
-        { id: 10, name: "Item 10" },
-      ],
+      patientInfo: {}, // 환자 정보
+      latestHealthRecord: {}, // 최근 건강 정보
+      examInfo: [] // 전체 진료 정보 데이터 배열
     };
   },
+  computed: {
+    filteredExamInfo() {
+      // PT_NO가 1인 데이터만 필터링
+      return this.examInfo.filter(item => item.PT_NO === 1);
+    }
+  },
   methods: {
+    // Axios를 사용하여 slow-step.json 데이터 로드
+    loadPatientData() {
+      axios.get('http://localhost:3000/exam_info')
+        .then(response => {
+          // 응답 데이터 확인 (콘솔 출력)
+          console.log(response.data);
+
+          // 응답 데이터가 배열 형태인지 확인
+          if (Array.isArray(response.data)) {
+            const filteredExamInfo = response.data.filter(item => item.PT_NO === 1);
+
+            // 필터링된 데이터가 존재하는지 확인
+            if (filteredExamInfo.length > 0) {
+              this.examInfo = filteredExamInfo;
+
+              // 화면에 표시할 데이터를 확인 (콘솔 출력)
+              console.log('Filtered Exam Info:', this.examInfo);
+
+              // 최근 건강 정보 설정 (예시: 첫 번째 데이터 사용)
+              // this.latestHealthRecord = filteredExamInfo[0];
+            } else {
+              console.warn('No exam records found for PT_NO 1');
+            }
+          } else {
+            console.error('Invalid response data format:', response.data);
+          }
+        })
+        .catch(error => {
+          console.error('Error loading patient data:', error);
+        });
+    },
+
+    loadPatientHealthInfo() {
+      axios.get('http://localhost:3000/pt_hth_info')
+        .then(response => {
+          if (Array.isArray(response.data)) {
+            const patientHealthInfo = response.data;
+
+            // PT_NO가 1인 데이터만 필터링
+            const filteredHealthInfo = patientHealthInfo.filter(item => item.PT_NO === 1);
+
+            if (filteredHealthInfo.length > 0) {
+              // INSP_DT를 기준으로 내림차순 정렬하여 최신 데이터 가져오기
+              const latestHealthRecord = filteredHealthInfo.reduce((prev, current) => {
+                return (new Date(current.INSP_DT) > new Date(prev.INSP_DT)) ? current : prev;
+              });
+
+              // 최신 데이터의 PT_BP, PT_BST, PT_HR 값을 출력
+              console.log('Latest PT_BP:', latestHealthRecord.PT_BP);
+              console.log('Latest PT_BST:', latestHealthRecord.PT_BST);
+              console.log('Latest PT_HR:', latestHealthRecord.PT_HR);
+              this.latestHealthRecord = filteredHealthInfo[0];
+            } else {
+              console.warn('No health records found for PT_NO 1');
+            }
+          } else {
+            console.warn('Invalid response data format:', response.data);
+          }
+        })
+        .catch(error => {
+          console.error('Error loading patient health info:', error);
+        });
+    },
+
+
+
+
     // 아이템 상세 페이지로 이동하는 메서드
-    goToExamView(itemId) {
-      // 아이템 상세 페이지로 이동
-      this.$router.push(`/patient/exam/view/${itemId}`);
+    goToExamView(examNo) {
+      this.$router.push(`/patient/exam/view/${examNo}`);
     },
 
     toHealthList() {
-      // 메인 페이지로 이동
       this.$router.push({ name: "HealthList" });
     },
 
     toHealthAdd() {
-      // 메인 페이지로 이동
       this.$router.push({ name: "HealthAdd" });
     },
 
     toExamAdd() {
-      // 메인 페이지로 이동
       this.$router.push({ name: "ExamAdd" });
     },
 
     toMain() {
-      // 메인 페이지로 이동
       this.$router.push({ name: "UserMain" });
-    },
+    }
   },
+  mounted() {
+    this.loadPatientData(); // 환자 정보 데이터 로드
+    this.loadPatientHealthInfo();
+  }
 };
 </script>
+
 
 <style scoped>
 .card-container {
