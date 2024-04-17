@@ -14,7 +14,8 @@
     <div class=" listDiv">
       <div class="card" v-for="msg in msgList" :key="msg.PM_NO">
         <div class="card-body cardBorder"
-            @click="toMsgView(msg.PM_NO)">
+            @click="toMsgView(msg.PM_NO)"
+            :class="{ TRSM_DIR_0 : msg.TRSM_DIR == 0}" >
 
             <div class="row" >
               <div class="col-1">
@@ -64,7 +65,11 @@ export default {
 
     const getMsgList = () => {
 
-      let url = `/pm?PM_RM_NO=${pmRmNo}&TRSM_DIR=0`;
+      // if(loginUser.JOP_TYP === "D"){
+      //   TRSM_DIR = 1이면 배경 노란색
+      //   TRSM_DIR = 0이면 배경 파란색
+
+      let url = `/pm?PM_RM_NO=${pmRmNo}`;
       // 로그인 구현시 수정
       console.log(url);
 
@@ -146,7 +151,8 @@ export default {
 
     position: relative;
     cursor: pointer;
-  
+
+    background-color: rgb(152, 226, 245);
   }
 
   .card{
@@ -157,6 +163,11 @@ export default {
     transform: translateY(-5px); /* Y축 이동 효과 */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 강조된 그림자 효과 */
     background-color: #f7f7f7;
+  }
+
+  .TRSM_DIR_0{
+    /* 0 : 간호사 - 의사 */
+    background-color: rgb(252, 255, 203);
   }
   
   .badge{
