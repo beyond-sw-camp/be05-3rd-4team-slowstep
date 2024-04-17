@@ -102,9 +102,27 @@ export default {
   }
 
   .card-body{
+
+    border: 1px solid green;
+    border-radius: 1.1em;
+    padding : 2%;  
+
+    max-height : 60vh;
+
     position: relative;
     cursor: pointer;
   }
+
+  .card{
+    border : none
+  }
+
+  .card-body:hover{
+    transform: translateY(-5px); /* Y축 이동 효과 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 강조된 그림자 효과 */
+    background-color: #f7f7f7;
+  }
+
   .badge{
     position:absolute;
     top:-5px;

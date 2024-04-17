@@ -13,11 +13,19 @@
 
     <div class=" listDiv">
       <div class="card" v-for="msg in msgList" :key="msg.PM_NO">
-        <div class="card-body"
+        <div class="card-body cardBorder"
             @click="toMsgView(msg.PM_NO)">
 
-          <div class="badge" v-if="msg.RD_YN == 0">✿</div>
-          {{ msg.PM_CN }}
+            <div class="row" >
+              <div class="col-10" >
+                {{ msg.PM_CN }}
+              </div>
+              <div class="col-1">
+                <i v-if="msg.RD_YN == 0" class="fas fa-bell message-icon" ></i>
+              </div>
+            </div>
+
+          <!-- <div class="badge" v-if="msg.RD_YN == 0">✿</div> -->     
         </div>
       </div>
     </div>
@@ -132,9 +140,28 @@ export default {
   }
 
   .card-body{
+
+    border: 1px solid green;
+    border-radius: 1.1em;
+    padding : 2%;  
+
+    max-height : 60vh;
+
     position: relative;
     cursor: pointer;
+  
   }
+
+  .card{
+    border : none
+  }
+
+  .card-body:hover{
+    transform: translateY(-5px); /* Y축 이동 효과 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 강조된 그림자 효과 */
+    background-color: #f7f7f7;
+  }
+  
   .badge{
     position:absolute;
     top:-5px;
@@ -145,4 +172,8 @@ export default {
     background-color: coral;
   }
 
+  .message-icon {
+    color:red; /* 아이콘 색상 변경, 필요에 따라 조정 가능 */
+    font-size: 1.2em; /* 아이콘 크기 조정 */
+  }
 </style>
