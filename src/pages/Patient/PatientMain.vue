@@ -125,7 +125,7 @@ const router = useRouter(); // useRouter를 사용하여 router 객체를 가져
 const rnNo = ref(0);
 const ogdpInstNm = ref("");
 
-localStorage.setItem("patient",JSON.stringify(ptInfo));
+localStorage.setItem("patient", JSON.stringify(ptInfo.value));
 
 const loadRnNo = async () => {
   try{
