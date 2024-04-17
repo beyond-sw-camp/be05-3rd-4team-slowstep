@@ -3,10 +3,10 @@
     <h1>Log In</h1>
   </div>
   <div align="center" class="email">
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="이메일을 입력하세요">
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="이메일을 입력하세요" v-model="email">
   </div>
   <div align="center" class="password">
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호를 입력하세요" autocomplete="off">
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호를 입력하세요" autocomplete="off" v-model="pwd">
   </div>
     <label class="find" @click="toFind">아이디/비밀번호찾기</label>
   <div align="center" class="login">
@@ -16,19 +16,36 @@
 
 <script>
 import {useRouter} from 'vue-router';
-// import axios from 'axios';
+import {ref} from 'vue';
+import axios from '@/axios';
 export default {
 
   setup() {
     const router = useRouter();
-    const isLoggedIn = false;
-    const toLogIn = () => {
+    let isLoggedIn = false;
+    const email = ref('');
+    const pwd = ref('');
+    let response = '';
+    const toLogIn = async () => {
+      try {
+        response = await axios.get(`mbr?MBR_EML=${email.value}`);
+        console.log(response.data);
+        console.log(response.data[0].MBR_PWD)
+        if(response.data[0].MBR_PWD === `${pwd.value}`) {
+          isLoggedIn = true;
+        } else {
+          isLoggedIn = false;
+        }
+      } catch(e) {
+        console.log("e")
+      }
+
       if(isLoggedIn) {
-        console.log("happy");
-      } else {
         router.push({
           name: "UserMain"
         })
+      } else {
+        console.log("happy")
       }
     }
     const toFind = () => {
@@ -38,7 +55,10 @@ export default {
     }
     return {
       toLogIn,
-      toFind
+      toFind,
+      email,
+      pwd,
+      response
     }
   }
 }
