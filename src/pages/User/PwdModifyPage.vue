@@ -35,7 +35,7 @@ export default {
       })
     }
     const toSave = async () => {
-      response = await axios.get(`${'회원이메일'}`);
+      response = await axios.get(`mbr?MBR_PWD=${''}`);
       if(now.value === response.data.MBR_PWD) {
         if(change.value !== now.value) {
           if(change.value === changecon.value) {
