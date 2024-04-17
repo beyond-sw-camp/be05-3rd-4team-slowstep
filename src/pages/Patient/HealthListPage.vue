@@ -14,7 +14,7 @@
         <div class="card-body"
             @click="toHealthView(health.PT_HTH_INFO_NO, index)">
 
-          {{ health.INSP_DT }}
+          {{ health.INSP_DT === "" ? happy :  health.INSP_DT}}
         </div>
       </div>
     </div>

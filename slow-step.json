@@ -300,44 +300,14 @@
       "INSP_DT": "2024-04-16 09:00:00"
     },
     {
-      "ptHthInfoNo": 3,
-      "ptNo": 1,
-      "ptBp": "100",
-      "ptBst": "90",
-      "ptWt": "80",
-      "ptHr": "70",
-      "inspDt": "",
-      "id": 3
-    },
-    {
-      "id": 4,
-      "ptHthInfoNo": 4,
-      "ptNo": 1,
-      "ptBp": "100",
-      "ptBst": "70",
-      "ptWt": "60",
-      "ptHr": "50",
-      "inspDt": "2024-04-17"
-    },
-    {
-      "id": 5,
-      "ptHthInfoNo": 5,
-      "ptNo": 1,
-      "ptBp": "80",
-      "ptBst": "90",
-      "ptWt": "70",
-      "ptHr": "80",
-      "inspDt": "2024-04-17 15:18:17"
-    },
-    {
-      "id": 6,
-      "ptHthInfoNo": 6,
-      "ptNo": 1,
-      "ptBp": "1",
-      "ptBst": "1",
-      "ptWt": "1",
-      "ptHr": "1",
-      "inspDt": "2024-04-17 15:41:02"
+      "id": 3,
+      "PT_HTH_INFO_NO": 3,
+      "PT_NO": 1,
+      "PT_BP": "120",
+      "PT_BST": "90",
+      "PT_WT": "70",
+      "PT_HR": "70",
+      "INSP_DT": "2024-04-17 16:19:36"
     }
   ],
   "uh_md": [
