@@ -10,7 +10,12 @@
       <div class="col-5">
         <div class="input-group">
           <span class="input-group-text">기록날짜</span>
-          <input type="date" aria-label="Year" class="form-control indent" />
+          <input
+            type="date"
+            aria-label="Year"
+            class="form-control indent"
+            v-model="EXAM_YMD"
+          />
         </div>
       </div>
 
@@ -29,7 +34,9 @@
             class="form-control"
             aria-label="With textarea"
             rows="10"
-          ></textarea>
+            v-model="DIS_NM"
+          >
+          </textarea>
         </div>
       </div>
 
@@ -49,6 +56,7 @@
             class="form-control"
             aria-label="With textarea"
             rows="5"
+            v-model="RX_CN"
           ></textarea>
         </div>
       </div>
@@ -61,9 +69,12 @@
         <button class="btn btn-success back" v-on:click="toPatientMain">
           뒤로가기
         </button>
-        <button class="btn btn-success regi">등록</button>
+        <button class="btn btn-success regi" v-on:click="examAdd">등록</button>
       </div>
 
+      <div v-if="ifNull" class="alert alert-danger mt-4">
+        공백은 입력될 수 없습니다.
+      </div>
       <div class="col-3"></div>
     </div>
   </div>
@@ -71,8 +82,16 @@
 
 <script>
 import { useRouter } from "vue-router";
+import { ref } from "vue";
+import axios from "@/axios";
 export default {
   setup() {
+    const ifNull = ref(false);
+    const RX_CN = ref("");
+    const EXAM_YMD = ref("");
+    const DIS_NM = ref("");
+    const examInfo = ref("");
+
     const router = useRouter();
     const toPatientMain = () => {
       router.push({
@@ -80,8 +99,60 @@ export default {
       });
     };
 
+    const examAdd = () => {
+      let url = `exam_info`;
+      let data = {
+        id: examInfo.value + 1,
+        EXAM_NO: examInfo.value + 1,
+        PT_NO: 3,
+        RX_CN: RX_CN.value,
+        DIS_NM: DIS_NM.value,
+        EXAM_YMD: EXAM_YMD.value,
+        PIC_MD_NM: "",
+      };
+
+      if (
+        RX_CN.value.length == 0 ||
+        DIS_NM.value.length == 0 ||
+        EXAM_YMD.value.length == 0
+      ) {
+        ifNull.value = true;
+        console.log("asdasd");
+      } else {
+        console.log(1234);
+        axios(url, { method: "POST", data: data })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      }
+    };
+
+    const getExamInfo = async () => {
+      let url = `exam_info`;
+
+      axios(url)
+        .then((res) => {
+          examInfo.value = res.data.length;
+          console.log(examInfo.value);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+
+    getExamInfo();
+
     return {
       toPatientMain,
+      examAdd,
+      getExamInfo,
+      examInfo,
+      EXAM_YMD,
+      DIS_NM,
+      RX_CN,
     };
   },
 };
