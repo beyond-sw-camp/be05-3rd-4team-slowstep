@@ -18,25 +18,46 @@
 </template>
 
 <script>
-//import {useRouter} from 'vue-router';
-//import {ref} from 'vue';
-//import axios from '@/axios';
+import {useRouter} from 'vue-router';
+import {ref} from 'vue';
+import axios from '@/axios';
 export default {
   setup() {
-   // let now = ref('');
-   // let change = ref('');
-   // let changecon = ref('');
-   // let reference = ref('');
-    //const router = useRouter();
+    let now = ref('');
+    let change = ref('');
+    let changecon = ref('');
+    let response = '';
+    const router = useRouter();
     const toMoveBack = () => {
-      console.log("back!!!!")
+      console.log("현재 진행상황이 저장되지 않습니다. 뒤로 가시겠습니까?");
+      router.push({
+        name: "UserMain"
+      })
     }
-    const toSave = () => {
-      console.log("saved!!!!")
+    const toSave = async () => {
+      response = await axios.get(`${'회원이메일'}`);
+      if(now.value === response.data.MBR_PWD) {
+        if(change.value !== now.value) {
+          if(change.value === changecon.value) {
+            console.log("okay")
+          } else {
+            console.log("새로운 비밀번호와 비밀번호 확인이 다릅니다");
+          }
+        } else {
+          console.log("새로운 비밀번호는 현재 비밀번호와 같을 수 없습니다");
+        }
+      } else {
+        console.log("비밀번호가 다릅니다");
+      }
     }
     return {
       toMoveBack,
-      toSave
+      toSave,
+      now,
+      change,
+      changecon,
+      response,
+      router
     }
   }
 }
