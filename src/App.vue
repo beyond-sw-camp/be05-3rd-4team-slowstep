@@ -1,14 +1,11 @@
 <template>
   <nav class="navbar navbar-expand-lg" style="background-color: #28a745;">
     <div class="container-fluid">
-      <router-link class="navbar-brand" :to="{ name: 'Login' }">Hanwha SW Camp 5th</router-link>
+      <router-link class="navbar-brand" :to="{ name: 'Login' }">Slow-Step</router-link>
 
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <router-link class="nav-link active" aria-current="page" :to="{ name: 'Login' }">To-Work</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link active" aria-current="page" :to="{ name: 'Login' }">Name</router-link>
+        <li class="nav-item" v-show="isLoggedIn">
+          <router-link class="nav-link active" aria-current="page" :to="{ name: 'Modify' }">{{ name }}</router-link>
         </li>
       </ul>
     </div>
@@ -20,8 +17,25 @@
 </template>
 
 <script>
+import {ref} from 'vue';
 export default {
-  
+  setup() {
+    let isLoggedIn = ref(false);
+    const name = localStorage.getItem("name");
+    const LogIn = () => {
+      if(name !== null) {
+        isLoggedIn.value = true;
+      } else {
+        isLoggedIn.value = false;
+      }  
+    }
+    LogIn();
+    return {
+      isLoggedIn,
+      name,
+      LogIn
+    }
+  }
 }
 </script>
 

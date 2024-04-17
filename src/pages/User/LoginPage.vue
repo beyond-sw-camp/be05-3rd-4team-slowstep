@@ -31,6 +31,8 @@ export default {
     const email = ref('');
     const pwd = ref('');
     let response = '';
+    let responseName = '';
+    let responsePwd = '';
     const toLogIn = async () => {
       try {
         response = await axios.get(`mbr?MBR_EML=${email.value}`);
@@ -43,6 +45,8 @@ export default {
         isLoggedIn.value = true;
       }
       localStorage.setItem("response",JSON.stringify(response));
+      localStorage.setItem("name", JSON.stringify(response.data[0].MBR_NM));
+      localStorage.setItem("pwd", JSON.stringify(response.data[0].MBR_PWD));
 
       if(isLoggedIn.value) {
         console.log("happy")
@@ -63,7 +67,9 @@ export default {
       email,
       pwd,
       response,
-      isLoggedIn
+      isLoggedIn,
+      responseName,
+      responsePwd
     }
   }
 }
