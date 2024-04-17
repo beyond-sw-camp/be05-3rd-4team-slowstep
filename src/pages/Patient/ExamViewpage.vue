@@ -95,6 +95,8 @@ export default {
     const route = useRoute();
     const router = useRouter();
     let examInfo = ref({});
+    // const ptNo = ptObj.PT_NO;
+    // console.log(ptNo);
     
     let ptInfo = JSON.parse(localStorage.getItem("patient"));
     console.log(ptInfo);
