@@ -40,63 +40,95 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 export default {
-  data() {
-    return {
-      nurses: [],
-      patients: [],
-      doctorId: 3  // 현재 로그인한 의사의 ID
-    };
-  },
-  created() {
-    this.fetchNurses();
-    this.fetchPatients();
-  },
-  methods: {
-    fetchNurses() {
+  setup() {
+    const nurses = ref([]);
+    const patients = ref([]);
+    const loginUser = JSON.parse(localStorage.getItem("response")).data[0];
+    console.log(loginUser);
+    // console.log(JSON.parse(localStorage.getItem("response")).data[0]);
+    const router = useRouter();
+
+    const fetchNurses = () => {
       axios.get('http://localhost:3000/mbr')
         .then(response => {
-          const filteredNurses = response.data.filter(nurse => nurse.JOB_TYP === 'N').map(nurse => {
-            return { ...nurse, hasMessage: Math.random() > 0.5 };
-          });
-          this.nurses = filteredNurses;
+          if(loginUser.JOB_TYP === "D"){
+            const filteredNurses = response.data.filter(nurse => nurse.JOB_TYP === 'N').map(nurse => {
+              return { ...nurse, hasMessage: Math.random() > 0.5 };
+            });
+            nurses.value = filteredNurses;
+          }else{
+            const filteredNurses = response.data.filter(nurse => nurse.JOB_TYP === 'N').map(nurse => {
+              return { ...nurse, hasMessage: Math.random() > 0.5 };
+            });
+            nurses.value = filteredNurses;
+          }
         })
         .catch(error => {
           console.error('간호사 목록을 불러오는 중 에러 발생:', error);
         });
-    },
-    fetchPatients() {
-      // md_pt_rn_rel 관계 데이터와 환자 정보를 가져오는 요청
+    };
+
+    // 담당 환자 list 불러오기
+    const fetchPatients = () => {
       axios.get('http://localhost:3000/md_pt_rn_rel')
         .then(relResponse => {
-          // 의사 ID에 맞는 관계 데이터 필터링
-          const patientIds = relResponse.data.filter(rel => rel.MD_NO === this.doctorId).map(rel => rel.PT_NO);
-          // 필터링된 환자 ID를 기반으로 환자 정보 요청
+
+         if(loginUser.JOB_TYP === "D"){
+          const patientIds = relResponse.data.filter(rel => rel.MD_NO === loginUser.MBR_NO).map(rel => rel.PT_NO);
           axios.get('http://localhost:3000/pt')
             .then(ptResponse => {
-              this.patients = ptResponse.data.filter(patient => patientIds.includes(patient.PT_NO));
+              patients.value = ptResponse.data.filter(patient => patientIds.includes(patient.PT_NO));
             });
+         }else{
+          const patientIds = relResponse.data.filter(rel => rel.RN_NO === loginUser.MBR_NO).map(rel => rel.PT_NO);
+          axios.get('http://localhost:3000/pt')
+            .then(ptResponse => {
+              patients.value = ptResponse.data.filter(patient => patientIds.includes(patient.PT_NO));
+            });
+         }
         })
         .catch(error => {
           console.error('환자 정보를 불러오는 중 에러 발생:', error);
         });
-    },
-    selectNurse(nurse) {
+    };
+
+    const selectNurse = (nurse) => {
       console.log('선택한 간호사:', nurse.MBR_NM);
-      this.$router.push({ name: 'MsgList', params: { id: nurse.MBR_NO }});
-    },
-    selectPatient(patient) {
+      router.push({ name: 'MsgList', params: { id: nurse.MBR_NO }});
+    };
+
+    const selectPatient = (patient) => {
       console.log('선택한 환자:', patient.name);
-    },
-    viewPatientDetail(patient) {
+    };
+
+    const viewPatientDetail = (patient) => {
       console.log('환자 상세 보기:', patient.name);
-      this.$router.push({ name: 'PatientMain', params: { id: patient.name } });
-    }
+      router.push({ name: 'PatientMain', state : { 
+        data : JSON.stringify(patient)
+       } });
+    };
+
+    onMounted(() => {
+      fetchNurses();
+      fetchPatients();
+    });
+
+    return {
+      nurses,
+      patients,
+      selectNurse,
+      selectPatient,
+      viewPatientDetail,
+    };
   }
 };
 </script>
+
 
 
 
