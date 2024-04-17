@@ -47,7 +47,10 @@ export default {
         console.log("happy")
       } else {
         router.push({
-          name: "UserMain"
+          name: "UserMain",
+          state: {
+            data: JSON.stringify(response.data[0])
+          }
         })
       }
     }
