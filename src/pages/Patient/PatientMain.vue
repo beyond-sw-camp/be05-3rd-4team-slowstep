@@ -125,18 +125,21 @@ const router = useRouter(); // useRouter를 사용하여 router 객체를 가져
 const rnNo = ref(0);
 const ogdpInstNm = ref("");
 
+const ptObj = JSON.parse(history.state.data);
+const ptNo = ptObj.PT_NO;
+
 localStorage.setItem("patient", JSON.stringify(ptInfo.value));
 
 const loadRnNo = async () => {
   try{
     const rnNoResponse = await axios.get('http://localhost:3000/md_pt_rn_rel');
     if (Array.isArray(rnNoResponse.data)) {
-      const filteredRnNo = rnNoResponse.data.filter(item => item.PT_NO === 1);
+      const filteredRnNo = rnNoResponse.data.filter(item => item.PT_NO === ptNo);
       if (filteredRnNo.length > 0) {
         rnNo.value = filteredRnNo[0].RN_NO;
         return rnNo;
       } else {
-        console.warn('No exam records found for PT_NO 1');
+        console.warn('No exam records found for PT_NO');
       }
     }
   } catch(error){
@@ -153,7 +156,7 @@ const loadOgdpInstNm = async () => {
         ogdpInstNm.value = filteredOgdpInstNm[0].OGDP_INST_NM;
         return ogdpInstNm;
       } else {
-        console.warn('No exam records found for PT_NO 1');
+        console.warn('No exam records found for PT_NO');
       }
     }
   } catch(error){
@@ -166,7 +169,7 @@ const loadPatientData = async () => {
   try {
     const examInfoResponse = await axios.get('http://localhost:3000/exam_info');
     if (Array.isArray(examInfoResponse.data)) {
-      examInfo.value = examInfoResponse.data.filter(item => item.PT_NO === 1);
+      examInfo.value = examInfoResponse.data.filter(item => item.PT_NO === ptNo);
       latestHealthRecord.value = examInfo.value[0];
     } else {
       console.error('Invalid response data format:', examInfoResponse.data);
@@ -180,11 +183,11 @@ const loadPatientInfo = async () =>{
   try {
     const ptInfoResponse = await axios.get('http://localhost:3000/pt');
     if (Array.isArray(ptInfoResponse.data)) {
-      const filteredPtInfo = ptInfoResponse.data.filter(item => item.PT_NO === 1);
+      const filteredPtInfo = ptInfoResponse.data.filter(item => item.PT_NO === ptNo);
       if (filteredPtInfo.length > 0) {
         ptInfo.value = filteredPtInfo[0];
       } else {
-        console.warn('No exam records found for PT_NO 1');
+        console.warn('No exam records found for PT_NO');
       }
     } else {
       console.error('Invalid response data format:', ptInfoResponse.data);
@@ -199,7 +202,7 @@ const loadPatientHealthInfo = async () => {
   try {
     const healthInfoResponse = await axios.get('http://localhost:3000/pt_hth_info');
     if (Array.isArray(healthInfoResponse.data)) {
-      const filteredHealthInfo = healthInfoResponse.data.filter(item => item.PT_NO === 1);
+      const filteredHealthInfo = healthInfoResponse.data.filter(item => item.PT_NO === ptNo);
       if (filteredHealthInfo.length > 0) {
         latestHealthRecord.value = filteredHealthInfo.reduce((prev, current) => {
           return (new Date(current.INSP_DT) > new Date(prev.INSP_DT)) ? current : prev;
@@ -251,7 +254,7 @@ onMounted(() => {
 
 // computed 속성으로 필터된 examInfo 반환
 const filteredExamInfo = computed(() => {
-  return examInfo.value.filter(item => item.PT_NO === 1);
+  return examInfo.value.filter(item => item.PT_NO === ptNo);
 });
 
 const filteredExamInfoSorted = computed(() => {

@@ -69,6 +69,24 @@
       "DIS_NM": "#",
       "EXAM_YMD": "2024-04-07",
       "PIC_MD_NM": ""
+    },
+    {
+      "id": 8,
+      "EXAM_NO": 8,
+      "PT_NO": 1,
+      "RX_CN": "#",
+      "DIS_NM": "#",
+      "EXAM_YMD": "2024-04-10",
+      "PIC_MD_NM": ""
+    },
+    {
+      "id": 9,
+      "EXAM_NO": 9,
+      "PT_NO": 1,
+      "RX_CN": "$",
+      "DIS_NM": "$",
+      "EXAM_YMD": "2024-04-11",
+      "PIC_MD_NM": ""
     }
   ],
   "mbr": [
