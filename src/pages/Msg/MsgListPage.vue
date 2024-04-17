@@ -3,7 +3,7 @@
     <div class="row mb-2 mt-5">
       <div class="col-9" >
         <!-- 로그인 구현시 수정 -->
-        <label class="nameDiv">간호사 ooo님</label>
+        <label class="nameDiv">간호사 {{targetRn.MBR_NM}}님</label>
       </div>
       <div class="col-3 flex" >
         <button class="btn btn-success" v-on:click="toMain">뒤로가기</button>
@@ -45,6 +45,10 @@ export default {
     let msgList = ref([]);
     
     let pmRmNo = 0; 
+
+    let targetRn = ref([]);
+    targetRn = JSON.parse(localStorage.getItem("TargetRn"));
+    console.log(targetRn);
 
     const getPmRm = () => {
       let url = "/pm_rm?MD_NO=1&RN_NO=2";
@@ -107,6 +111,7 @@ export default {
     }
 
     return {
+      targetRn,
       msgList,
       getMsgList,
       toMsgView,
