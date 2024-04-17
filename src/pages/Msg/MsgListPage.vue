@@ -2,8 +2,7 @@
   <div class="container">
     <div class="row mb-2 mt-5">
       <div class="col-9" >
-        <!-- 로그인 구현시 수정 -->
-        <label class="nameDiv">간호사 {{targetRn.MBR_NM}}님</label>
+        <label class="nameDiv">{{targetRn}}님</label>
       </div>
       <div class="col-3 flex" >
         <button class="btn btn-success" v-on:click="toMain">뒤로가기</button>
@@ -47,12 +46,23 @@ export default {
     let pmRmNo = 0; 
 
     let targetRn = ref([]);
-    targetRn = JSON.parse(localStorage.getItem("TargetRn"));
-    console.log(targetRn);
+    const targetInfo = JSON.parse(localStorage.getItem("TargetRn"));
+    console.log("main에서 넘어온 정보 : " ,targetInfo);
+
+    const loginUser = JSON.parse(localStorage.getItem("response")).data[0];
+    console.log("로그인된 정보 : " ,loginUser);
 
     const getPmRm = () => {
-      let url = "/pm_rm?MD_NO=1&RN_NO=2";
-      // 로그인 구현시 수정
+      let url = "";
+
+      if(loginUser.JOB_TYP === "D"){
+        url = `/pm_rm?MD_NO=${loginUser.MBR_NO}&RN_NO=${targetInfo.MBR_NO}`;
+        targetRn.value = "간호사 " + targetInfo.MBR_NM;
+      }else{
+        url = `/pm_rm?MD_NO=${targetInfo.MBR_NO}&RN_NO=${loginUser.MBR_NO}`;
+      }
+      // 로그인한 유저의 JOP_TYP == D면 로그인한 유저의 MBR_NO == MD_NO RN_NO가 전달된 객체의 MBR_NO
+
       axios(url)
         .then( res => {
           pmRmNo = res.data[0].PM_RM_NO;
@@ -112,6 +122,7 @@ export default {
 
     return {
       targetRn,
+      loginUser,
       msgList,
       getMsgList,
       toMsgView,
