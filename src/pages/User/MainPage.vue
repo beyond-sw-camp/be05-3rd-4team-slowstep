@@ -25,8 +25,8 @@
               <div class="info-and-button">
                 <div class="hospital-name">느린마음 요양원</div>
                 <div class="patient-name-age-gender">
-                  <h5>{{ patient.name }}</h5>
-                  <p>{{ patient.age }} 세, {{ patient.gender }}</p>
+                  <h5>{{ patient.PT_NM }}</h5>
+                  <p>{{ patient.PT_BRYMD}}, {{ patient.PT_GNDR }}</p>
                 </div>
                 <!-- 버튼 -->
                 <button class="btn btn-success" @click="viewPatientDetail(patient)">환자 상세 보기</button>
@@ -46,26 +46,41 @@ export default {
   data() {
     return {
       nurses: [],
-      patients: [
-        { name: '홍길동', age: 65, gender: '남성' },
-        { name: '홍길순', age: 70, gender: '여성' },
-        { name: '정광수', age: 72, gender: '남성' },
-        { name: '정광희', age: 68, gender: '여성' },
-        { name: '정황엽', age: 75, gender: '남성' }
-      ]
+      patients: [],
+      doctorId: 3  // 현재 로그인한 의사의 ID
     };
   },
   created() {
     this.fetchNurses();
+    this.fetchPatients();
   },
   methods: {
     fetchNurses() {
       axios.get('http://localhost:3000/mbr')
         .then(response => {
-          this.nurses = response.data.filter(nurse => nurse.JOB_TYP === 'N');
+          const filteredNurses = response.data.filter(nurse => nurse.JOB_TYP === 'N').map(nurse => {
+            return { ...nurse, hasMessage: Math.random() > 0.5 };
+          });
+          this.nurses = filteredNurses;
         })
         .catch(error => {
           console.error('간호사 목록을 불러오는 중 에러 발생:', error);
+        });
+    },
+    fetchPatients() {
+      // md_pt_rn_rel 관계 데이터와 환자 정보를 가져오는 요청
+      axios.get('http://localhost:3000/md_pt_rn_rel')
+        .then(relResponse => {
+          // 의사 ID에 맞는 관계 데이터 필터링
+          const patientIds = relResponse.data.filter(rel => rel.MD_NO === this.doctorId).map(rel => rel.PT_NO);
+          // 필터링된 환자 ID를 기반으로 환자 정보 요청
+          axios.get('http://localhost:3000/pt')
+            .then(ptResponse => {
+              this.patients = ptResponse.data.filter(patient => patientIds.includes(patient.PT_NO));
+            });
+        })
+        .catch(error => {
+          console.error('환자 정보를 불러오는 중 에러 발생:', error);
         });
     },
     selectNurse(nurse) {
@@ -82,6 +97,7 @@ export default {
   }
 };
 </script>
+
 
 
 <style scoped>
