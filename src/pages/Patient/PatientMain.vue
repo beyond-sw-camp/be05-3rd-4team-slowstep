@@ -215,14 +215,16 @@ const loadPatientHealthInfo = async () => {
         (item) => item.PT_NO === ptNo
       );
       if (filteredHealthInfo.length > 0) {
-
-        latestHealthRecord.value = filteredHealthInfo.reduce((prev, current) => {
-          return (new Date(current.INSP_DT) > new Date(prev.INSP_DT)) ? current : prev;
-        });
+        latestHealthRecord.value = filteredHealthInfo.reduce(
+          (prev, current) => {
+            return new Date(current.INSP_DT) > new Date(prev.INSP_DT)
+              ? current
+              : prev;
+          }
+        );
         console.log(latestHealthRecord);
       } else {
-        console.warn('No health records found for PT_NO');
-
+        console.warn("No health records found for PT_NO");
       }
     } else {
       console.warn("Invalid response data format:", healthInfoResponse.data);

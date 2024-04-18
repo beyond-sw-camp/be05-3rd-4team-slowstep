@@ -253,7 +253,7 @@
       "PM_CN": "dummy message 1",
       "TRSM_DIR": "1",
       "PM_DSPTCH_DT": "2024-04-16 00:00:00",
-      "RD_YN": "0",
+      "RD_YN": "1",
       "RD_DT": null,
       "DELETE_YN": "0",
       "DELETE_DT": null
@@ -265,7 +265,7 @@
       "PM_CN": "dummy message 2",
       "TRSM_DIR": "0",
       "PM_DSPTCH_DT": "2024-04-16 00:00:00",
-      "RD_YN": "0",
+      "RD_YN": "1",
       "RD_DT": null,
       "DELETE_YN": "0",
       "DELETE_DT": null

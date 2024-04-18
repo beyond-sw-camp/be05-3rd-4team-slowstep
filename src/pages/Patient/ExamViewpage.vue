@@ -5,7 +5,7 @@
         <div class="fromDiv">
           <div><h2>진료기록 입력</h2></div>
           <div>
-            <h2>{{ ptInfo.PT_NM }}</h2>
+            <h2>{{ ptNm }} 님</h2>
           </div>
         </div>
       </div>
@@ -99,8 +99,22 @@ export default {
     // const ptNo = ptObj.PT_NO;
     // console.log(ptNo);
 
-    let ptInfo = JSON.parse(localStorage.getItem("patient"));
-    console.log(ptInfo);
+    const ptNm = ref();
+    const ptNo = localStorage.getItem("TargetPtNo");
+    const getPtNm = () => {
+      let url = `/pt?PT_NO=${ptNo}`;
+
+      axios(url)
+        .then((res) => {
+          console.log(res.data[0]);
+          ptNm.value = res.data[0].PT_NM;
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+
+    getPtNm();
 
     const toPatientMain = () => {
       router.push({
@@ -115,7 +129,6 @@ export default {
         .then((res) => {
           examInfo.value = res.data[route.params.id - 1];
           console.log(examInfo.value);
-          console.log(ptInfo.value);
         })
         .catch((err) => {
           console.log(err.message);
@@ -144,7 +157,9 @@ export default {
       toPatientMain,
       examInfo,
       getExamInfo,
-      ptInfo,
+      getPtNm,
+      ptNm,
+      ptNo,
       // getPtInfo,
     };
   },

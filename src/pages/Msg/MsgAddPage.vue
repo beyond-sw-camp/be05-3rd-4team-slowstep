@@ -34,21 +34,8 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-
 export default {
-  setup() {
-    const router = useRouter();
-    const toMsgList = () => {
-      router.push({
-        name: "MsgList",
-      });
-    };
-
-    return {
-      toMsgList,
-    };
-  },
+  setup() {},
 };
 </script>
 
