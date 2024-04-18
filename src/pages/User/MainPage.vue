@@ -7,7 +7,7 @@
         <div class="list-group">
           <div class="list-group-item nurse-card" v-for="nurse in nurses" :key="nurse.MBR_NM" @click="selectNurse(nurse)">
             {{ loginUser.JOB_TYP === "D" ? '간호사' : '의사' }} : {{ nurse.MBR_NM }}
-            <i v-if="nurse.hasMessage" class="fas fa-bell message-icon"></i>
+            <!-- <i v-if="nurse.hasMessage" class="fas fa-bell message-icon"></i> -->
           </div>
         </div>
       </div>
@@ -58,12 +58,12 @@ export default {
         .then(response => {
           if(loginUser.JOB_TYP === "D"){
             const filteredNurses = response.data.filter(nurse => nurse.JOB_TYP === 'N').map(nurse => {
-              return { ...nurse, hasMessage: Math.random() > 0.5 };
+              return nurse;
             });
             nurses.value = filteredNurses;
           }else{
             const filteredNurses = response.data.filter(nurse => nurse.JOB_TYP === 'D').map(nurse => {
-              return { ...nurse, hasMessage: Math.random() > 0.5 };
+              return nurse;
             });
             nurses.value = filteredNurses;
           }
