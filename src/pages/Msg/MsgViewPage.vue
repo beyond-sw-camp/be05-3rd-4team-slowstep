@@ -89,7 +89,7 @@ export default {
           console.log(pmInfo.value.PM_DSPTCH_DT);
 
           if ((pmInfo.value.TRSM_DIR === "0" && loginUser.JOB_TYP === "D")
-              && (pmInfo.value.TRSM_DIR === "1" && loginUser.JOB_TYP === "N")) {
+              || (pmInfo.value.TRSM_DIR === "1" && loginUser.JOB_TYP === "N")) {
               if(pmInfo.value.RD_YN === "0"){
                 console.log("happy");
                 updatePmInfo();
