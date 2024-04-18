@@ -53,6 +53,8 @@ export default {
     const router = useRouter();
     const route = useRoute();
     const pmInfo = ref({});
+    const loginUser = JSON.parse(localStorage.getItem("response")).data[0];
+    console.log("MsgAdd - 로그인된 정보 : ",loginUser);
 
     const toMsgList = () => {
       router.push({
@@ -86,9 +88,12 @@ export default {
           console.log(pmInfo.value);
           console.log(pmInfo.value.PM_DSPTCH_DT);
 
-          if (pmInfo.value.RD_YN === "0") {
-              console.log("happy");
-              updatePmInfo();
+          if ((pmInfo.value.TRSM_DIR === "0" && loginUser.JOB_TYP === "D")
+              && (pmInfo.value.TRSM_DIR === "1" && loginUser.JOB_TYP === "N")) {
+              if(pmInfo.value.RD_YN === "0"){
+                console.log("happy");
+                updatePmInfo();
+              }  
           }
         })
         .catch((err) => {
