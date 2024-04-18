@@ -22,10 +22,10 @@ export default {
   setup() {
     let isLoggedIn = ref(false);
     let name = localStorage.getItem("name");
-    name = name.substr(1,3);
     const LogIn = () => {
       if(name !== null) {
         isLoggedIn.value = true;
+        name = name.substr(1,3);
       } else {
         isLoggedIn.value = false;
       }  
