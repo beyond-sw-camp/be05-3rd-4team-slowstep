@@ -147,7 +147,7 @@
 
 **- 쪽지 페이지**
 1. 의사 간호사 쪽지 전달 쪽지 등록 확인
-![간호사-의사 메시지 전달 _ 메시지 등록 확인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/c3ec4879-bb10-4d87-a196-581b2b0a8ada)
+![간호사-의사 메시지 전달 _ 메시지 등록 확인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/caa2efec-feea-4e22-af61-afae95b37236)
 
 3. 의사 간호사 쪽지 수신
 ![의사 간호사 메시지 수신](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/e1107223-1da6-47f8-958e-f34acc2bee5a)
