@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://github.com/beyond-sw-camp/be05-2nd-4Rang-SlowStep/assets/137466623/23557808-48da-486c-8302-1baa70ea0eb7" width="850" height="650">
+<img src="https://github.com/beyond-sw-camp/be05-2nd-4Rang-SlowStep/assets/137466623/323f40b0-4830-4c0a-b5f7-9478e0068db7" width="850" height="650">
 </div>
 </br>
 </br>
