@@ -72,7 +72,7 @@
 <br/>
 
 ## 3. 사용 기술
-
+<img src="https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white">
 
 ## 4. 요구사항 명세서
 
