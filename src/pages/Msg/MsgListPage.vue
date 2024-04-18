@@ -87,7 +87,6 @@ export default {
       //   TRSM_DIR = 0이면 배경 파란색
 
       let url = `/pm?PM_RM_NO=${pmRmNo}`;
-      // 로그인 구현시 수정
       console.log(url);
 
       axios(url)
@@ -119,7 +118,10 @@ export default {
 
     const toMsgAdd = () => {
       router.push({
-        name : "MsgAdd"
+        name : "MsgAdd",
+        params : {
+          id : pmRmNo
+        }
       })
     }
 
