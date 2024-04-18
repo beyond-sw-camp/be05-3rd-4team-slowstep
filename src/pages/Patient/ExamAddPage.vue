@@ -76,12 +76,13 @@
 
       <div class="col-3"></div>
     </div>
-
-    <div v-if="ifNull" class="alert alert-danger mt-4">
-      공백은 입력될 수 없습니다.
-    </div>
-    <div v-if="result" class="alert alert-success mt-4">
-      건강정보가 등록되었습니다.
+    <div class="row mb-2 mt-5">
+      <div v-if="ifNull" class="alert alert-danger mt-4">
+        공백은 입력될 수 없습니다.
+      </div>
+      <div v-if="result" class="alert alert-success mt-4">
+        건강정보가 등록되었습니다.
+      </div>
     </div>
   </div>
 </template>
@@ -195,6 +196,8 @@ export default {
       ptNm,
       ptNo,
       getPtNm,
+      ifNull,
+      result,
     };
   },
 };

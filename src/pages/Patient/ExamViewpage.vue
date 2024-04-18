@@ -3,7 +3,7 @@
     <div class="row mb-2 mt-5">
       <div class="col-4">
         <div class="fromDiv">
-          <div><h2>진료기록 입력</h2></div>
+          <div><h2>진료기록 내역</h2></div>
           <div>
             <h2>{{ ptInfo.PT_NM }}</h2>
           </div>

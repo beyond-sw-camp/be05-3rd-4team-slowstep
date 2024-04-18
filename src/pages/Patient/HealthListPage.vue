@@ -112,6 +112,7 @@ export default {
     padding : 2%;  
 
     max-height : 60vh;
+    margin-bottom: 0.5rem;
 
     position: relative;
     cursor: pointer;

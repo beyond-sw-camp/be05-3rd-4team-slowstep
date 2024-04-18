@@ -89,7 +89,7 @@
         class="btn btn-success mb-3"
         @click="toExamAdd"
         style="float: right"
-      >
+        v-if="loginUser.JOB_TYP === 'D'">
         <b>+</b>
       </button>
       <div
@@ -130,8 +130,10 @@ const rnNo = ref(0);
 const ogdpInstNm = ref("");
 
 const ptNo = JSON.parse(localStorage.getItem("TargetPtNo"));
+const loginUser = JSON.parse(localStorage.getItem("response")).data[0];
 
 localStorage.setItem("patient", JSON.stringify(ptInfo.value));
+
 const loadRnNo = async () => {
   try {
     const rnNoResponse = await axios.get("http://localhost:3000/md_pt_rn_rel");
