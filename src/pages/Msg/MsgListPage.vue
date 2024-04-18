@@ -4,7 +4,7 @@
       <div class="col-9" >
 
         <!-- 로그인 구현시 수정 -->
-        <label class="nameDiv">{{ targetRn.JOB_TYP === 'N' ? '간호사' : '의사' }} {{ targetRn.MBR_NM }}님</label>
+        <label class="nameDiv">{{ targetInfo.JOB_TYP === 'N' ? '간호사' : '의사' }} {{ targetInfo.MBR_NM }}님</label>
 
       </div>
       <div class="col-3 flex" >
@@ -125,6 +125,7 @@ export default {
 
     return {
       targetRn,
+      targetInfo,
       loginUser,
       msgList,
       getMsgList,
