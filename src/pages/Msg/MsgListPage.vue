@@ -23,8 +23,11 @@
               <div class="col-1">
                 <i v-if="msg.RD_YN == 0" class="fas fa-bell message-icon" ></i>
               </div>
-              <div class="col-11" >
+              <div class="col-9" >
                 {{ msg.PM_CN }}
+              </div>
+              <div class="col-2" >
+                {{ msg.PM_DSPTCH_DT}}
               </div>
             </div>
 

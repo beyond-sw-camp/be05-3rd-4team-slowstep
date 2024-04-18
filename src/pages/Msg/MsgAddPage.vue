@@ -6,6 +6,7 @@
           <input
             class="form-control"
             type="text"
+            readonly
             v-model="name"
           />
         </div>
