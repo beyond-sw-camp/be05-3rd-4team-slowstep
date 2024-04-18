@@ -61,12 +61,32 @@
 </div>
 <br/>
 
-## 사용 기술
+## 3. 사용 기술
 
-## 화면 및 기능설계서
+
+## 4. 요구사항 명세서
+
+<details>
+<summary>요구사항 명세서</summary>
+  <img src="https://github.com/beyond-sw-camp/be05-2nd-4Rang-SlowStep/assets/132131921/7f4d3e6e-1c13-4400-a74c-a52ca455b0a2" alt="요구사항 명세서" style='border-radius: 100px;'>
+
+</details>
+
+
+## 5. 화면 및 기능설계서
 [기능명세서](https://docs.google.com/viewer?url=https://github.com/beyond-sw-camp/be05-2nd-4Rang-SlowStep/files/14768307/03.27.11.09.pdf)
 
-## 테스트계획 및 결과 보고서
+## 6. 아키텍처
+<details>
+<summary>ERD</summary>
+  <img src="https://github.com/beyond-sw-camp/be05-2nd-4Rang-SlowStep/assets/156383201/16238c24-7593-4697-b41d-9f9c8be5f678" alt="환자 정보 조회" style='border-radius: 100px;'>
+</details>
+<details>
+<summary>클래스 다이어그램</summary>
+  <img src="https://github.com/beyond-sw-camp/be05-2nd-4Rang-SlowStep/assets/156383201/e988629d-e6c3-42bd-b9d5-cad21bf9f1a6" alt="환자 정보 조회" style='border-radius: 100px;'>
+</details>
+
+## 7. 테스트계획 및 결과 보고서
  - 로그인 페이지
 1. 로그인 성공 시 -> 사용자 메인 페이지로 이동
 2. 로그인 실패 시 -> 경고창 생성
