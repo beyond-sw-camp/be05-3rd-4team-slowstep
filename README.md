@@ -107,11 +107,13 @@
 4. 로그인 실패 및 비밀번호 찾기
 ![로그인 실패 및 비밀번호 찾기](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/af6f874e-7912-453c-8cd7-e33a28eaaf7a)
 
+<br/>
 
 - 비밀번호 수정 페이지
 1. 비밀번호 수정
 ![비밀번호-변경](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/fd1d9374-4e51-4123-b3ef-d2d2993c6ca0)
 
+<br/>
 
 - 사용자 메인 페이지
 1. 환자별 서로 다른 메인페이지
