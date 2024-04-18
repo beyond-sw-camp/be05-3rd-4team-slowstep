@@ -97,7 +97,7 @@
 </details>
 
 ## 7. 테스트계획 및 결과 보고서
- - 로그인 페이지
+ **- 로그인 페이지**
 1. 간호사 로그인
 ![의사-로그인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/2f3ae2ad-9b49-4145-91ce-8b18e1bb4a3c)
 
@@ -109,13 +109,13 @@
 
 <br/>
 
-- 비밀번호 수정 페이지
+**- 비밀번호 수정 페이지**
 1. 비밀번호 수정
 ![비밀번호-변경](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/fd1d9374-4e51-4123-b3ef-d2d2993c6ca0)
 
 <br/>
 
-- 사용자 메인 페이지
+**- 사용자 메인 페이지**
 1. 환자별 서로 다른 메인페이지
 ![환자별_서로_다른_환자메인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/1b8f6633-708e-472a-9f23-ba3a47bb7764)
   
@@ -137,7 +137,7 @@
 9. 환자 진료내역 추가, 잘못된 값 입력
 ![환자메인_진료내역추가_잘못된값입력](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/37bb9968-e309-489f-b683-084c3c199d1c)
 
-- 쪽지 페이지
+**- 쪽지 페이지**
 1. 의사 간호사 쪽지 전달 쪽지 등록 확인
 ![간호사-의사 메시지 전달 _ 메시지 등록 확인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/c3ec4879-bb10-4d87-a196-581b2b0a8ada)
 
