@@ -43,7 +43,7 @@ const router = createRouter({
       component: MsgList,
     },
     {
-      path: "/msg/add",
+      path: "/msg/add/:id",
       name: "MsgAdd",
       component: MsgAdd,
     },

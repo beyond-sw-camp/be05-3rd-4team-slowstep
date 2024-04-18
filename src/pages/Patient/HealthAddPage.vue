@@ -155,6 +155,7 @@ export default {
         .then(res => {
           console.log(res);
           result.value = true;
+          ptBp.value = ""; ptBst.value = ""; ptWt.value = ""; ptHr.value = ""
         })
         .catch(err => {
           console.log(err);
