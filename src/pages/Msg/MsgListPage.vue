@@ -3,7 +3,6 @@
     <div class="row mb-2 mt-5">
       <div class="col-9" >
 
-        <!-- 로그인 구현시 수정 -->
         <label class="nameDiv">{{ targetInfo.JOB_TYP === 'N' ? '간호사' : '의사' }} {{ targetInfo.MBR_NM }}님</label>
 
       </div>
@@ -87,6 +86,7 @@ export default {
       //   TRSM_DIR = 0이면 배경 파란색
 
       let url = `/pm?PM_RM_NO=${pmRmNo}`;
+      // 로그인 구현시 수정
       console.log(url);
 
       axios(url)
@@ -118,10 +118,7 @@ export default {
 
     const toMsgAdd = () => {
       router.push({
-        name : "MsgAdd",
-        params : {
-          id : pmRmNo
-        }
+        name : "MsgAdd"
       })
     }
 
@@ -168,13 +165,14 @@ export default {
     border: 1px solid green;
     border-radius: 1.1em;
     padding : 2%;  
+    margin-bottom: 0.5rem;
 
     max-height : 60vh;
 
     position: relative;
     cursor: pointer;
 
-    background-color: rgb(152, 226, 245);
+    background-color: rgba(152, 226, 245, 0.126);
   }
 
   .card{
@@ -182,14 +180,14 @@ export default {
   }
 
   .card-body:hover{
-    transform: translateY(-5px); /* Y축 이동 효과 */
+    transform: translateY(-5px); /* Y축 이동 효과 */  
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* 강조된 그림자 효과 */
-    background-color: #f7f7f7;
+    background-color: #a6ffc134;
   }
 
   .TRSM_DIR_0{
     /* 0 : 간호사 - 의사 */
-    background-color: rgb(252, 255, 203);
+    background-color: rgba(252, 255, 203, 0.489);
   }
   
   .badge{
