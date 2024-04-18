@@ -98,35 +98,58 @@
 
 ## 7. 테스트계획 및 결과 보고서
  - 로그인 페이지
-1. 로그인 성공 시 -> 사용자 메인 페이지로 이동
-2. 로그인 실패 시 -> 경고창 생성
-3. 비밀번호 찾기 페이지 클릭 시 -> 비밀번호 찾기 페이지로 이동
+1. 간호사 로그인
+![의사-로그인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/2f3ae2ad-9b49-4145-91ce-8b18e1bb4a3c)
 
-- 비밀번호 찾기 페이지
-1.관리자 문의 메시지 출력
+3. 의사 로그인
+![의사 로그인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/50900a54-d076-43c0-9b4a-2bf9a22035ce)
+
+4. 로그인 실패 및 비밀번호 찾기
+![로그인 실패 및 비밀번호 찾기](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/af6f874e-7912-453c-8cd7-e33a28eaaf7a)
+
 
 - 비밀번호 수정 페이지
-1
+1. 비밀번호 수정
+![비밀번호-변경](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/fd1d9374-4e51-4123-b3ef-d2d2993c6ca0)
+
 
 - 사용자 메인 페이지
+1. 환자별 서로 다른 메인페이지
+![환자별_서로_다른_환자메인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/1b8f6633-708e-472a-9f23-ba3a47bb7764)
+  
+3. 환자 건강내역 세부정보
+![환자메인_건강내역_세부정보](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/e11f3e8a-2e32-4e94-bed5-ac839083a31a)
+
+5. 환자 건강내역 추가, 확인
+![환자메인_건강내역추가_확인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/05e29e60-c670-47f9-9be7-71ecbd46ac20)
+
+6. 환자 건강내역 추가, 잘못된 값 입력
+![환자메인_건강내역추가_잘못된값입력](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/959c0582-6b39-4751-9573-cd34d2277c82)
+
+7. 환자 진료내역 상세정보
+![환자메인_진료내역_상세정보](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/0e13bfc7-fbca-4819-a9e2-6c995581c750)
+
+8. 환자 진료내역 추가, 확인
+![환자메인_진료내역추가_확인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/1702cc7b-1bd3-42ba-b134-2a5ab20718de)
+
+9. 환자 진료내역 추가, 잘못된 값 입력
+![환자메인_진료내역추가_잘못된값입력](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/37bb9968-e309-489f-b683-084c3c199d1c)
 
 - 쪽지 페이지
+1. 의사 간호사 쪽지 전달 쪽지 등록 확인
+![간호사-의사 메시지 전달 _ 메시지 등록 확인](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/c3ec4879-bb10-4d87-a196-581b2b0a8ada)
 
-- 쪽지 내용 페이지
+3. 의사 간호사 쪽지 수신
+![의사 간호사 메시지 수신](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/e1107223-1da6-47f8-958e-f34acc2bee5a)
 
-- 쪽지 추가 페이지
+4. 의사, 간호사 쪽지 전달 확인, 알림 사라짐
+![의사-간호사-메시지-전달-확인_알림-사라짐](https://github.com/beyond-sw-camp/be05-3rd-4team-slowstep/assets/132131921/ad1a94f5-2b97-4e93-b2c6-3a7de455a38d)
 
-- 환자 메인 페이지
 
-- 건강정보 내역 페이지
 
-- 건강정보 상세 페이지
 
-- 건강정보 추가 페이지
 
-- 진료기록 상세 페이지
 
-- 진료기록 추가 페이지 
 
 
 
