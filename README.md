@@ -33,6 +33,6 @@
 ## 사용 기술
 
 ## 화면 및 기능설계서
-
+[기능명세서](https://docs.google.com/viewer?url=https://github.com/beyond-sw-camp/be05-2nd-4Rang-SlowStep/files/14768307/03.27.11.09.pdf)
 ## 테스트계획 및 결과 보고서
  
