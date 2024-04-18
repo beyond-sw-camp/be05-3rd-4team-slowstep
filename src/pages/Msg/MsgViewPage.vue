@@ -6,7 +6,7 @@
           <input
             class="form-control"
             type="text"
-            value="OOO 간호사."
+            v-model="name"
             readonly
           />
         </div>
@@ -50,6 +50,10 @@ import { ref } from "vue";
 
 export default {
   setup() {
+
+    const name = JSON.parse(localStorage.getItem("TargetRn")).MBR_NM;
+    console.log(name);
+
     const router = useRouter();
     const route = useRoute();
     const pmInfo = ref({});
@@ -104,6 +108,7 @@ export default {
     getPmInfo();
 
     return {
+      name,
       toMsgList,
       pmInfo,
       getPmInfo,

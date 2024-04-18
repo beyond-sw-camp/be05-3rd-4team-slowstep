@@ -292,7 +292,7 @@
       "PM_CN": "dummy message 2",
       "TRSM_DIR": "0",
       "PM_DSPTCH_DT": "2024-04-16 00:00:00",
-      "RD_YN": "0",
+      "RD_YN": "1",
       "RD_DT": null,
       "DELETE_YN": "0",
       "DELETE_DT": null
@@ -352,6 +352,18 @@
       "PM_CN": "Bye",
       "TRSM_DIR": "1",
       "PM_DSPTCH_DT": "2024-04-18T11:37",
+      "RD_YN": "0",
+      "RD_DT": null,
+      "DELETE_YN": "0",
+      "DELETE_DT": null
+    },
+    {
+      "id": 16,
+      "PM_NO": 16,
+      "PM_RM_NO": 1,
+      "PM_CN": "안녕하세요!",
+      "TRSM_DIR": "1",
+      "PM_DSPTCH_DT": "2024-04-18T12:14",
       "RD_YN": "0",
       "RD_DT": null,
       "DELETE_YN": "0",
