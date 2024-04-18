@@ -21,7 +21,8 @@ import {ref} from 'vue';
 export default {
   setup() {
     let isLoggedIn = ref(false);
-    const name = localStorage.getItem("name");
+    let name = localStorage.getItem("name");
+    name = name.substr(1,3);
     const LogIn = () => {
       if(name !== null) {
         isLoggedIn.value = true;
